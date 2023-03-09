@@ -1,1 +1,1 @@
-add_subdirectory(./AppMgmt)    
+add_subdirectory(./Application)    

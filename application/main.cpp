@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "./code/utilities/AppMgmt/Application.hpp"
+#include "./code/utilities/Application/Application.hpp"
 int main()
 {
     std::cout << "Hello world!\n";
