@@ -5,6 +5,7 @@ class Weapon
 {
 private:
     static uint32_t wIdGlobal_;
+protected:
     uint32_t wId_;
 public:
     Weapon(/* args */);

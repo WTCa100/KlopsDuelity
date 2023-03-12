@@ -7,6 +7,8 @@ include_directories(./code)
 target_link_libraries(${PROJECT_NAME}
     Application
     Menu
+    HEU
+    shooter
     weapon
     springfield1835
 )
