@@ -2,10 +2,20 @@
 
 class Application
 {
+// TODO:
+/*
+1. Add Checking of the directories
+2. Add config building
+3. Load/save from config
+Note: this time config should be stored in different file with specified extension
+*/
+
 private:
-    /* data */
-public:
+    static Application* instance_;
     Application();
+public:
+    static Application* getInstance();
+    void displayMenu();
     ~Application();
 };
 

@@ -6,6 +6,8 @@ private:
     /* data */
 public:
     Menu(/* args */);
+    // Delete this later
+    void startGame();
     ~Menu();
 };
 

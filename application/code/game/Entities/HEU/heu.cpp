@@ -10,6 +10,11 @@ namespace entities
         hIdGlobal_++;
     }
 
+    HEU::HEU(bool isPlayer, std::string name) : isPlayer_(isPlayer), name_(name)
+    {
+        HEU();
+    }
+
     HEU::~HEU()
     {
         std::cout << "Destruction of Human Entity Unity " << std::endl;

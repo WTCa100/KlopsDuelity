@@ -1,15 +1,20 @@
 #include "./weapons.hpp"
 
-uint32_t Weapon::wIdGlobal_ = 0;
-
-Weapon::Weapon()
+namespace entities
 {
-    std::cout << "Creating weapon with ID: " << wIdGlobal_ << std::endl;
-    wId_ = wIdGlobal_;
-    wIdGlobal_++;
-}
+    uint32_t Weapon::wIdGlobal_ = 0;
+    
+    Weapon::Weapon()
+    {
+        std::cout << "Creating weapon with ID: " << wIdGlobal_ << std::endl;
+        wId_ = wIdGlobal_;
+        wIdGlobal_++;
+    }
+    
+    Weapon::~Weapon()
+    {
+        std::cout << "Deleting weapon with ID: " << wId_ << std::endl; 
+    }    
+} // namespace entities
 
-Weapon::~Weapon()
-{
-    std::cout << "Deleting weapon with ID: " << wId_ << std::endl; 
-}
+
