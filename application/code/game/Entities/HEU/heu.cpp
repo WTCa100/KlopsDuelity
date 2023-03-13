@@ -12,7 +12,10 @@ namespace entities
 
     HEU::HEU(bool isPlayer, std::string name) : isPlayer_(isPlayer), name_(name)
     {
-        HEU();
+        std::cout << "Name assgined " << name_ << " isPlayer assigned " << isPlayer_ << std::endl;
+        std::cout << "Creation of Human Entity Unit " << std::endl;
+        hId_ = hIdGlobal_;
+        hIdGlobal_++;
     }
 
     HEU::~HEU()

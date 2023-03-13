@@ -11,15 +11,12 @@ Menu::Menu()
     std::cout << "Menu :ctor:\n";
 }
 
-void Menu::startGame()
+void Menu::mainDisplay()
 {
-    entities::HEUTypes::Shooter* enemy = new entities::HEUTypes::Shooter;
-    entities::HEUTypes::Shooter* player = new entities::HEUTypes::Shooter;
-    enemy->presentWeapon();
-    player->presentWeapon();
-
-    delete enemy; delete player;
-
+    std::cout << "Welcome to Klops Duelit!\n";
+    std::cout << "What do you want to do\n";
+    std::cout << "Lmao you can't choose xD\n";
+    std::cin.ignore();
 }
 
 Menu::~Menu()

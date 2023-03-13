@@ -6,6 +6,8 @@ include_directories(./code)
 #include every new library here
 target_link_libraries(${PROJECT_NAME}
     Application
+    Session
+    player
     Menu
     HEU
     shooter

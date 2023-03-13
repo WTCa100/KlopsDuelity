@@ -7,7 +7,7 @@ private:
 public:
     Menu(/* args */);
     // Delete this later
-    void startGame();
-    ~Menu();
+    virtual void mainDisplay();
+    virtual ~Menu();
 };
 

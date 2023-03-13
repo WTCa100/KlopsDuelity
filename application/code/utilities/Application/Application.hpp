@@ -13,9 +13,10 @@ Note: this time config should be stored in different file with specified extensi
 private:
     static Application* instance_;
     Application();
+    void startGameSession();
 public:
+    void startApp();
     static Application* getInstance();
-    void displayMenu();
     ~Application();
 };
 

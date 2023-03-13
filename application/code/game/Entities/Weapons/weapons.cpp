@@ -10,6 +10,21 @@ namespace entities
         wId_ = wIdGlobal_;
         wIdGlobal_++;
     }
+
+    Weapon::Weapon(std::string wName) : name_(wName)
+    {
+        std::cout << "Creating weapon with ID: " << wIdGlobal_ << ". Name assinged: " << name_ << std::endl;
+        wId_ = wIdGlobal_;
+        wIdGlobal_++; 
+    }
+
+    bool Weapon::shoot()
+    {
+        std::cout << "**POW**\n";
+        
+        int diceRoll = rand() % 99 + 1;
+        return diceRoll <= (accuracy_ * 100);
+    }    
     
     Weapon::~Weapon()
     {

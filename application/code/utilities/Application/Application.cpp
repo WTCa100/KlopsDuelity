@@ -2,6 +2,8 @@
 
 #include "Application.hpp"
 #include "../../game/Menu/Menu.hpp"
+#include "../../game/Session/session.hpp"
+
 
 Application::Application()
 {
@@ -21,14 +23,22 @@ Application* Application::getInstance()
     }
 }
 
-void Application::displayMenu()
+void Application::startGameSession()
 {
-    Menu* test = new Menu;
-    // display menu
-    test->startGame();
-    delete test;
 }
 
+void Application::startApp()
+{
+    // TODO: get config
+    // Get menu display
+    Menu* mainMenu = new Menu;
+    mainMenu->mainDisplay();
+    Session* gameSession = new Session;
+    gameSession->characterCreation();
+    gameSession->duel();
+    delete gameSession;
+    // Create session
+}
 
 Application::~Application()
 {
