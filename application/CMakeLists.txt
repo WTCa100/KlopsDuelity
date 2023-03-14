@@ -7,6 +7,7 @@ include_directories(./code)
 target_link_libraries(${PROJECT_NAME}
     Application
     Session
+    Duels
     player
     Menu
     HEU

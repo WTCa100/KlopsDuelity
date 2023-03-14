@@ -10,7 +10,7 @@ namespace entities::HEUTypes
         modifyShooter.isConcious_ = true;
         if(modifyShooter.name_.empty())
         {
-            modifyShooter.name_ = "Dummy!";
+            modifyShooter.name_ = "no_name_assigned";
         }
     }
 
@@ -53,9 +53,11 @@ namespace entities::HEUTypes
         }
     }
 
-    void Shooter::presentWeapon()
+    void Shooter::pickWeapon()
     {
+        std::cout << name_ << " said \" I will be using ";
         currentlyHeldWeapon_->present();
+        std::cout << " for our duel!\"\n";
     }
     
     Shooter::~Shooter()

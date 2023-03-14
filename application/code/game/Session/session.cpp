@@ -1,6 +1,6 @@
 #include "./session.hpp"
 
-Session::Session() : mainCharacter_(nullptr)
+Session::Session() : mainCharacter_(nullptr), fighting_(nullptr)
 {
     std::cout << "Session starts\n";
 }
@@ -29,15 +29,12 @@ void Session::characterCreation()
 
 void Session::duel()
 {
-    std::cout << "!!Duel starts!!\n";
-    entities::HEUTypes::Shooter* enemy = new entities::HEUTypes::Shooter(false, "Bogdan");
+    std::cout << "!-- Debug prepare variables for duel\n";
+    entities::HEUTypes::Shooter* enemy = new entities::HEUTypes::Shooter(false, "RandomName");
     heuCount_.push_back(enemy); heuCount_.push_back(mainCharacter_);
-    // new Duel (Shooter1, Shooter2)
-    // in duel
-    enemy->presentWeapon();
-    mainCharacter_->presentWeapon();
-    enemy->fireWeapon(mainCharacter_);
-    mainCharacter_->fireWeapon(enemy);
+    fighting_ = new Duel(mainCharacter_, enemy);
+    fighting_->prepareForFight();
+    fighting_->shootOut();
 
     // After game show health of the oponents
     std::cout << "!-- Deubg main character health: " << mainCharacter_->getHealth() << std::endl;

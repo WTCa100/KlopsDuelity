@@ -1,0 +1,1 @@
+add_library(Duels STATIC duels.cpp duels.hpp)

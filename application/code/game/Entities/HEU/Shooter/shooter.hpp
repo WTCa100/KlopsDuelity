@@ -22,7 +22,7 @@ namespace entities::HEUTypes
 
         public:
         void assingDefaultParemters(Shooter& modifyShooter);
-        void presentWeapon();
+        void pickWeapon();
         void fireWeapon(Shooter* target);
         Shooter();
         Shooter(bool isPlayer, std::string name);

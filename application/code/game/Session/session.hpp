@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 
-// Get all types of entities
+#include "./Duel/duels.hpp"
 // Abstact
 #include "../Entities/HEU/heu.hpp"
 // HEUs
@@ -17,6 +17,7 @@ class Session
     // Config
     // Store information about every weapon/heu
     std::vector<entities::HEU*> heuCount_;
+    Duel* fighting_;
     Player* mainCharacter_;
     public:
     void characterCreation();

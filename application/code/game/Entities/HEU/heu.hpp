@@ -23,7 +23,12 @@ namespace entities
         uint32_t hId_;
         
         public:
+
+        // Setters
         void setEntityName(const std::string& newName) { name_ = newName; }
+
+        // Getters
+        std::string getEntityName() const { return name_;}
         HEU();
         HEU(bool isPlayer, std::string name);
         virtual ~HEU();

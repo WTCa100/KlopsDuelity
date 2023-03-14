@@ -10,7 +10,7 @@ namespace entities::weapons::muskets
     
     void springfield1835::present()
     {
-        std::cout << "It's a springfield\n";
+        std::cout << name_;
     }
     
     springfield1835::~springfield1835()
