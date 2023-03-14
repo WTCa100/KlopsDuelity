@@ -18,12 +18,12 @@ namespace entities
         wIdGlobal_++; 
     }
 
-    bool Weapon::shoot()
+    bool Weapon::shoot(/*List modifier*/ const double distance)
     {
         std::cout << "**POW**\n";
         
         int diceRoll = rand() % 99 + 1;
-        return diceRoll <= (accuracy_ * 100);
+        return diceRoll <= (baseAccuracy_ * 10) * ( 100 / distance );
     }    
     
     Weapon::~Weapon()
@@ -31,5 +31,3 @@ namespace entities
         std::cout << "Deleting weapon with ID: " << wId_ << std::endl; 
     }    
 } // namespace entities
-
-

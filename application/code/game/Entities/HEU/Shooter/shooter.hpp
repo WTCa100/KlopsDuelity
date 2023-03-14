@@ -8,10 +8,13 @@
 #include "../../Weapons/weapons.hpp"
 #include "../../Weapons/Muskets/Springfield1835/springfield1835.hpp"
 
+class Duel;
+
 namespace entities::HEUTypes
 {
     class Shooter : public HEU
     {
+        friend class ::Duel;        
         private:
         Weapon* currentlyHeldWeapon_;
         double health_;
@@ -23,7 +26,7 @@ namespace entities::HEUTypes
         public:
         void assingDefaultParemters(Shooter& modifyShooter);
         void pickWeapon();
-        void fireWeapon(Shooter* target);
+        void fireWeapon(Shooter* target, const double distance);
         Shooter();
         Shooter(bool isPlayer, std::string name);
         virtual ~Shooter();

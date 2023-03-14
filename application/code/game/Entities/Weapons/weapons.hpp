@@ -11,17 +11,22 @@ namespace entities
         static uint32_t wIdGlobal_;
     protected:
         std::string name_;
-        double accuracy_;
-        double dmg_;
+        double baseAccuracy_;
+        double baseDmg_;
         uint32_t wId_;
     public:
-        virtual std::string getWeaponName() const {return name_;}
-        Weapon(/* args */);
+        Weapon();
         Weapon(std::string wName);
         virtual void present() = 0;
-        virtual bool shoot();
+        virtual bool shoot(const double distance);
         // Aim - raises accuracy but lowers reward (both honor and money)
         virtual ~Weapon();
+
+        // Getters
+        std::string getWeaponName() const {return name_;}
+        double getWeaponBaseDmg() const {return baseDmg_;}
+        double getWeaponBaseAccuracy() const {return baseAccuracy_;}
+
     };
 
 }

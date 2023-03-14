@@ -34,18 +34,28 @@ namespace entities::HEUTypes
         }
     }
 
-    void Shooter::fireWeapon(Shooter* target)
+
+    void Shooter::fireWeapon(Shooter* target, const double distance)
     {
         std::cout << name_ << " fires his " << currentlyHeldWeapon_->getWeaponName() << std::endl;
         std::cout << "He is aiming at: " << target->name_ << std::endl;
-        bool hasHit = currentlyHeldWeapon_->shoot();
+        bool hasHit = currentlyHeldWeapon_->shoot(distance);
         std::cout << "!DEBUG --- " << name_ << " has ";
         if(hasHit)
         {
+            double hitPoints = this->currentlyHeldWeapon_->getWeaponBaseDmg() / distance;
             std::cout << "hit his oponent!\n";
             // Dummy value for now
-            target->health_ = target->health_ - 15;
+            target->health_ = target->health_ - hitPoints;
             std::cout << "!DEBUG --- NEW HEALTH " << target->health_ << std::endl;
+            if(target->health_ <= 0)
+            {
+                target->isConcious_ = false;
+                if(target->health_ <= -20)
+                {
+                    target->isDead_ = true;
+                }
+            }
         }
         else
         {
