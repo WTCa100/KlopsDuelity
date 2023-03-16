@@ -6,9 +6,11 @@ include_directories(./code)
 #include every new library here
 target_link_libraries(${PROJECT_NAME}
     Application
+    InputCheck    
     Session
     Duels
     player
+    Display
     Menu
     HEU
     shooter

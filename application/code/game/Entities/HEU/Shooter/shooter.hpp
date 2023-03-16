@@ -22,6 +22,8 @@ namespace entities::HEUTypes
         bool isDead_;
         /// @brief Health is lower than 0 but greater than 20
         bool isConcious_;
+        
+        uint32_t duelsWonCount_;
 
         public:
         void assingDefaultParemters(Shooter& modifyShooter);

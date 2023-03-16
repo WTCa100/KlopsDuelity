@@ -1,0 +1,1 @@
+add_library(InputCheck STATIC InputCheck.cpp InputCheck.hpp)

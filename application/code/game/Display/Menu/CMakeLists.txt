@@ -10,4 +10,7 @@ target_sources(Menu
 target_include_directories(Menu
     PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}
-)    
+)
+
+target_link_libraries(Menu PUBLIC Display)
+target_link_libraries(Menu PUBLIC InputCheck)

@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "Application.hpp"
-#include "../../game/Menu/Menu.hpp"
+#include "../../game/Display/Menu/Menu.hpp"
 #include "../../game/Session/session.hpp"
 
 
@@ -33,10 +33,20 @@ void Application::startApp()
     // Get menu display
     Menu* mainMenu = new Menu;
     mainMenu->mainDisplay();
-    Session* gameSession = new Session;
-    gameSession->characterCreation();
-    gameSession->duel();
-    delete gameSession;
+    // If statements for now - change to switch later
+    if(mainMenu->getActionChoosen() == MenuOptions::kStartGame || mainMenu->getActionChoosen() == MenuOptions::kNone)
+    {
+        Session* gameSession = new Session;
+        gameSession->characterCreation();
+        gameSession->duel();
+        delete gameSession;
+    }
+    else // Close app
+    {
+        std::cout << "Closing\n";
+        return;
+    }
+
     // Create session
 }
 

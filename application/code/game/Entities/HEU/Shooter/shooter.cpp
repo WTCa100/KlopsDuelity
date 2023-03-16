@@ -1,3 +1,5 @@
+#include <ctime>
+
 #include "./shooter.hpp"
 
 namespace entities::HEUTypes
@@ -26,10 +28,15 @@ namespace entities::HEUTypes
         std::cout << "Shooter spawned\n";
         if(isPlayer_)
         {
+            // Unless save was loaded
+            duelsWonCount_ = 0;
             std::cout << "Shooter with " << hId_ << " is a player\n";
         }
         else
         {
+            // Assing random value for now
+            // Todo, make this number be close to player's 
+            duelsWonCount_ = rand() % 301;
             std::cout << "Shooter with " << hId_ << " is not a player\n";
         }
     }
