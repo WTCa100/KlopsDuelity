@@ -1,11 +1,32 @@
 #include <ncurses.h> // for getch()
 
 #include "./duels.hpp"
+// Get modifiers
+#include "../../Modifiers/Modifiers.cpp"
+
 
 Duel::Duel(Player* player, Shooter* oponent) : player_(player), oponent_(oponent), distance_(12)
 {
+    calculateReward();
+    std::cout << "Stake is: " << reward_;
     std::cout << "Duel stars.\n";
     std::cout << player_->getEntityName() << " VS " << oponent_->getEntityName() << std::endl;
+}
+
+void Duel::calculateReward()
+{
+    // reward will be based on personal charisma and enemy stats
+    // Minimal value to win
+    double rewardBase = 100;
+
+//    double enemyModifer = oponent_->currentlyHeldWeapon_->getWeaponBaseDmg() + oponent_->currentlyHeldWeapon_->getWeaponBaseAccuracy();
+//    double distanceModifier = distance_ * 2;
+//    double charismaModifier = 1 + (static_cast<double>(player_->statCharisma_) / 10);
+//    reward_ = (rewardBase + enemyModifer + distanceModifier) * charismaModifier;
+    reward_ = Modifiers::duelReward(oponent_->currentlyHeldWeapon_->getWeaponBaseDmg(),
+                                    oponent_->currentlyHeldWeapon_->getWeaponBaseAccuracy(),
+                                    distance_, player_->statCharisma_, rewardBase);
+
 }
 
 void Duel::prepareForFight()
@@ -51,9 +72,6 @@ void Duel::changeDistance()
     std::cout << "!-- DEBUG: Adjusting of distance\n";
     // Initialize ncurses
     initscr();
-    //printw("You are %.2f meters away from your oponent\n", distance_);
-    //printw("Do you want to get closer or further?\n");
-    //printw("<- further | closer ->\n");
     refresh(); // Match screen refresh
     keypad(stdscr, TRUE); // Enable keypad 
     cbreak(); // Enbale line buffering
@@ -63,9 +81,11 @@ void Duel::changeDistance()
 
     while(true)
     {
+        calculateReward();
         printw("You are %.2f meters away from your oponent\n", distance_);
         printw("Debug: Dmg w/ modifier %.2f\n", player_->currentlyHeldWeapon_->getWeaponBaseDmg()/distance_);
-        printw("Debug: Acc w/ modifier %.2f\n", (player_->currentlyHeldWeapon_->getWeaponBaseAccuracy() * 10) * (100 / distance_));
+        printw("Debug: reward_ := %.2f\n", reward_);
+        printw("Debug: Acc w/ modifier %.2f\n", (player_->currentlyHeldWeapon_->getWeaponBaseAccuracy() * 10) * (100 / distance_) + static_cast<double>(player_->statAim_ * 10) / 100);
         // Show weapon acc and dmg 
         printw("Do you want to get closer or further?\n");
         printw("<-/'a' further | closer ->/'d'\n");                        

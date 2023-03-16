@@ -17,13 +17,20 @@ namespace entities::HEUTypes
         friend class ::Duel;        
         private:
         Weapon* currentlyHeldWeapon_;
+        
+        double healthMax_;
         double health_;
         /// @brief If shooter health drop below 20 hp he will die
         bool isDead_;
         /// @brief Health is lower than 0 but greater than 20
         bool isConcious_;
         
+        protected:
         uint32_t duelsWonCount_;
+        // Skill values
+        uint16_t statAim_;
+        uint16_t statVitality_;
+        uint16_t statCharisma_;
 
         public:
         void assingDefaultParemters(Shooter& modifyShooter);

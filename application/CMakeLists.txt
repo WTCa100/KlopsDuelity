@@ -8,6 +8,7 @@ target_link_libraries(${PROJECT_NAME}
     Application
     InputCheck    
     Session
+    modifiers
     Duels
     player
     Display

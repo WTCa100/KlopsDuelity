@@ -16,12 +16,14 @@ class Duel
 {
 friend class entities::HEU;
 private:
+    double reward_;
     Player* player_;
     Shooter* oponent_;
     Shooter* winner_;
     /// @brief Affects weapon dmg and accuracy as well as possible reward
     double distance_;
     void changeDistance();
+    void calculateReward();
 public:
     void prepareForFight();
     Shooter* shootOut();

@@ -7,13 +7,18 @@ namespace entities::HEUTypes
 
     void Shooter::assingDefaultParemters(Shooter& modifyShooter)
     {
-        modifyShooter.health_ = 100;
+        modifyShooter.healthMax_ = 100;
+        modifyShooter.health_ = modifyShooter.healthMax_;
         modifyShooter.isDead_ = false;
         modifyShooter.isConcious_ = true;
         if(modifyShooter.name_.empty())
         {
             modifyShooter.name_ = "no_name_assigned";
         }
+        // Assing default values for every stat and change it later
+        modifyShooter.statAim_ = 1;
+        modifyShooter.statCharisma_ = 1;
+        modifyShooter.statVitality_ = 1;
     }
 
     Shooter::Shooter() : currentlyHeldWeapon_(new entities::weapons::muskets::springfield1835)

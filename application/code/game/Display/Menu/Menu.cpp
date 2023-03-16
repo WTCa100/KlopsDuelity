@@ -35,7 +35,7 @@ void Menu::mainDisplay()
 bool Menu::getUserInput(std::string& userInput)
 {
     std::getline(std::cin, userInput);
-    return InputCheck::isStringNumber(userInput);
+    return InputCheck::isStringNumberInRange(userInput, 2);
 }
 
 Menu::~Menu()
