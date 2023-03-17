@@ -2,23 +2,31 @@
 
 #include "./shooter.hpp"
 
+// Get modifiers
+#include "../../../Modifiers/Modifiers.hpp"
+
 namespace entities::HEUTypes
 {
 
     void Shooter::assingDefaultParemters(Shooter& modifyShooter)
     {
-        modifyShooter.healthMax_ = 100;
-        modifyShooter.health_ = modifyShooter.healthMax_;
         modifyShooter.isDead_ = false;
         modifyShooter.isConcious_ = true;
         if(modifyShooter.name_.empty())
         {
             modifyShooter.name_ = "no_name_assigned";
         }
-        // Assing default values for every stat and change it later
-        modifyShooter.statAim_ = 1;
-        modifyShooter.statCharisma_ = 1;
-        modifyShooter.statVitality_ = 1;
+        // Assing default values for every stat and change it later if an entity is not a player
+        if(!isPlayer_)
+        {
+            modifyShooter.statAim_      = 0;
+            modifyShooter.statCharisma_ = 0;
+            modifyShooter.statVitality_ = 0;
+            // Assign members based on stats
+            modifyShooter.healthMax_ = Modifiers::calculateHealth(modifyShooter.statVitality_);
+            modifyShooter.health_ = modifyShooter.healthMax_;
+        }
+
     }
 
     Shooter::Shooter() : currentlyHeldWeapon_(new entities::weapons::muskets::springfield1835)

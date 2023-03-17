@@ -10,6 +10,7 @@ target_link_libraries(${PROJECT_NAME}
     Session
     modifiers
     Duels
+    OriginStories    
     player
     Display
     Menu

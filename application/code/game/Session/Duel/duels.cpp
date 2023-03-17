@@ -2,7 +2,7 @@
 
 #include "./duels.hpp"
 // Get modifiers
-#include "../../Modifiers/Modifiers.cpp"
+#include "../../Modifiers/Modifiers.hpp"
 
 
 Duel::Duel(Player* player, Shooter* oponent) : player_(player), oponent_(oponent), distance_(12)
@@ -86,6 +86,8 @@ void Duel::changeDistance()
         printw("Debug: Dmg w/ modifier %.2f\n", player_->currentlyHeldWeapon_->getWeaponBaseDmg()/distance_);
         printw("Debug: reward_ := %.2f\n", reward_);
         printw("Debug: Acc w/ modifier %.2f\n", (player_->currentlyHeldWeapon_->getWeaponBaseAccuracy() * 10) * (100 / distance_) + static_cast<double>(player_->statAim_ * 10) / 100);
+        printw("Debug: Player vitality %d\n", player_->statVitality_);
+        printw("Debug: Your hp: %.2f - Oponent hp: %.2f\n", player_->health_, oponent_->health_);
         // Show weapon acc and dmg 
         printw("Do you want to get closer or further?\n");
         printw("<-/'a' further | closer ->/'d'\n");                        

@@ -18,14 +18,14 @@ namespace entities::HEUTypes
         private:
         Weapon* currentlyHeldWeapon_;
         
-        double healthMax_;
-        double health_;
         /// @brief If shooter health drop below 20 hp he will die
         bool isDead_;
         /// @brief Health is lower than 0 but greater than 20
         bool isConcious_;
         
         protected:
+        double healthMax_;
+        double health_;
         uint32_t duelsWonCount_;
         // Skill values
         uint16_t statAim_;
@@ -45,6 +45,7 @@ namespace entities::HEUTypes
         double getHealth() const {return health_;}
         // Setters
         void setHealth(const double& newHealth) {health_ = newHealth;}
+        void setMaxHealth(const double& newHealthMax) {healthMax_ = newHealthMax; }
     };
     
 } // namespace entities

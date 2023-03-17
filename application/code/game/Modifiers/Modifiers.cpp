@@ -14,5 +14,10 @@ namespace Modifiers
         return (baseReward + enemyMod + distanceMod) * charismaMod;
     }
 
+    double calculateHealth(const int& entityVitality, const double healthBase = 100)
+    {
+        return healthBase * (1 + (static_cast<double>(entityVitality) / 10));
+    }
+
 
 } // namespace Modifiers
