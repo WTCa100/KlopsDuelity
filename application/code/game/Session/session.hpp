@@ -10,6 +10,9 @@
 #include "../Entities/HEU/Shooter/shooter.hpp"
 #include "../Player/player.hpp"
 
+// Menus
+#include "../Display/Menu/SessionMainScreen/SessionMainScreen.hpp"
+
 
 class Session
 {
@@ -19,8 +22,11 @@ class Session
     std::vector<entities::HEU*> heuCount_;
     Duel* fighting_;
     Player* mainCharacter_;
+
     public:
+    void core();
     void characterCreation();
+    void shop();
     void duel();
     Session(/*pass config*/);
     ~Session();

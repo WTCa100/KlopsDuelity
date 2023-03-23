@@ -2,8 +2,6 @@
 
 class Display
 {
-private:
-    /* data */
 public:
     // Delete this later
     virtual void mainDisplay() = 0;

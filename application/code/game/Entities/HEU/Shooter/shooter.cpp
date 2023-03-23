@@ -44,6 +44,7 @@ namespace entities::HEUTypes
             // Unless save was loaded
             duelsWonCount_ = 0;
             std::cout << "Shooter with " << hId_ << " is a player\n";
+            // TODO: Make player pick weapon his weapon
         }
         else
         {
@@ -85,6 +86,12 @@ namespace entities::HEUTypes
 
     void Shooter::pickWeapon()
     {
+        if(isPlayer_)
+        {
+            std::cout << "Pick your weapon:";
+            std::cin.ignore();
+        }
+
         std::cout << name_ << " said \" I will be using ";
         currentlyHeldWeapon_->present();
         std::cout << " for our duel!\"\n";

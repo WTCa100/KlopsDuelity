@@ -4,6 +4,7 @@ namespace entities::weapons::muskets
 {
     springfield1835::springfield1835() : Weapon("Springfield model 1835")
     {
+        basePrice_ = 120;
         baseDmg_ = 60;
         baseAccuracy_ = 0.25;
         std::cout << "Springfield created\n";

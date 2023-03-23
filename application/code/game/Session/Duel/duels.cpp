@@ -98,8 +98,6 @@ void Duel::changeDistance()
             case KEY_LEFT:
             case 'A':
             case 'a':
-                clear();
-                refresh();
                 distance_++;
                 break;
             case KEY_RIGHT:
@@ -110,12 +108,8 @@ void Duel::changeDistance()
                     printw("Distance cannot be lower than 1!\n");
                     refresh();
                     getch();
-                    clear();
-                    refresh();
                     break;
-                }
-                clear();
-                refresh();                
+                }            
                 distance_--;
                 break;
             case '\n':
@@ -127,10 +121,12 @@ void Duel::changeDistance()
                 printw("Please use arrow keys to move!\n");
                 refresh(); 
                 getch();
-                clear();
-                refresh();            
                 break;
         }
+
+        // TODO: Make screen refresh here is possible
+        clear();
+        refresh();
 
         // Check if exit
         if(exitLoop)

@@ -1,5 +1,5 @@
 #include "./weapons.hpp"
-
+#include "../../Modifiers/Modifiers.hpp"
 namespace entities
 {
     uint32_t Weapon::wIdGlobal_ = 0;
@@ -23,7 +23,7 @@ namespace entities
         std::cout << "**POW**\n";
         
         int diceRoll = rand() % 99 + 1;
-        return diceRoll <= (baseAccuracy_ * 10) * ( 100 / distance );
+        return diceRoll <= Modifiers::calculateAccuracy(baseAccuracy_, distance);
     }    
     
     Weapon::~Weapon()

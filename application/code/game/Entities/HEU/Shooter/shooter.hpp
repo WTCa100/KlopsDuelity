@@ -48,4 +48,4 @@ namespace entities::HEUTypes
         void setMaxHealth(const double& newHealthMax) {healthMax_ = newHealthMax; }
     };
     
-} // namespace entities
+} // namespace entities::HEUTypes

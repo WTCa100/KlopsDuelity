@@ -1,5 +1,7 @@
 #include "./session.hpp"
 
+#include "../Entities/HEU/Shopkeeper/shopkeeper.hpp"
+
 Session::Session() : mainCharacter_(nullptr), fighting_(nullptr)
 {
     std::cout << "Session starts\n";
@@ -25,6 +27,38 @@ void Session::characterCreation()
     std::cout << "Enter you name!\n";
     std::getline(std::cin, playerName);
     mainCharacter_ = new Player(playerName);
+}
+
+void Session::shop()
+{
+    entities::HEUTypes::Shopkeeper* shopOwner = new entities::HEUTypes::Shopkeeper(mainCharacter_);
+    shopOwner->act();
+    delete shopOwner;
+}
+
+void Session::core()
+{
+    characterCreation();
+    bool gameOn = true;
+    Menus::SessionMainScreen* mainSessionDisplay = new Menus::SessionMainScreen();
+    while(gameOn)
+    {
+        mainSessionDisplay->mainDisplay();
+        switch (mainSessionDisplay->getActionChoosen())
+        {
+        case SessionMainScreenOptions::kGoToArena:
+            duel();
+            break;
+        case SessionMainScreenOptions::kGoToShop :
+            shop();        
+            break;
+        case SessionMainScreenOptions::kQuit :
+            gameOn = false;
+            break;
+        }
+    }
+
+    delete mainSessionDisplay;
 }
 
 void Session::duel()

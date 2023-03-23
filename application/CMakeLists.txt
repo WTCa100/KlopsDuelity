@@ -13,9 +13,12 @@ target_link_libraries(${PROJECT_NAME}
     OriginStories    
     player
     Display
+    Town
     Menu
+    SessionMainScreen    
     HEU
     shooter
+    shopkeeper
     weapon
     springfield1835
 )

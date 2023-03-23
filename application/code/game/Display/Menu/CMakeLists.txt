@@ -12,5 +12,7 @@ target_include_directories(Menu
     ${CMAKE_CURRENT_LIST_DIR}
 )
 
+add_subdirectory(./SessionMainScreen)
+
 target_link_libraries(Menu PUBLIC Display)
 target_link_libraries(Menu PUBLIC InputCheck)

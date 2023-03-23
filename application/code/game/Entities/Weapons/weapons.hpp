@@ -13,6 +13,7 @@ namespace entities
         std::string name_;
         double baseAccuracy_;
         double baseDmg_;
+        double basePrice_;
         uint32_t wId_;
     public:
         Weapon();
@@ -26,6 +27,7 @@ namespace entities
         std::string getWeaponName() const {return name_;}
         double getWeaponBaseDmg() const {return baseDmg_;}
         double getWeaponBaseAccuracy() const {return baseAccuracy_;}
+        double getWeaponBasePrice() const {return basePrice_;}
 
     };
 

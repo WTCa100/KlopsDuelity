@@ -8,5 +8,6 @@ namespace Modifiers
 
     extern double calculateHealth(const int& entityVitality, const double healthBase = 100);
 
+    extern double calculateAccuracy(const double& baseAccuracy, const double& distance);
 
 } // namespace Modifiers

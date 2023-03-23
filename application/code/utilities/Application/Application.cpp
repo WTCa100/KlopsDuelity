@@ -37,8 +37,7 @@ void Application::startApp()
     if(mainMenu->getActionChoosen() == MenuOptions::kStartGame || mainMenu->getActionChoosen() == MenuOptions::kNone)
     {
         Session* gameSession = new Session;
-        gameSession->characterCreation();
-        gameSession->duel();
+        gameSession->core();
         delete gameSession;
     }
     else // Close app

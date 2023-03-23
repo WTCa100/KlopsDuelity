@@ -19,5 +19,10 @@ namespace Modifiers
         return healthBase * (1 + (static_cast<double>(entityVitality) / 10));
     }
 
+    double calculateAccuracy(const double& baseAccuracy, const double& distance)
+    {
+        return (baseAccuracy * 10) * (100 / distance);
+    }
+
 
 } // namespace Modifiers
