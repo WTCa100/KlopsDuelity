@@ -1,5 +1,5 @@
 #include <string>
-#include <iostream>
+#include <ncurses.h>
 
 #include "./originStories.hpp"
 
@@ -8,7 +8,7 @@
 
 Origin::Origin() : startingOrigin_(choosePlayerOrigin())
 {
-    std::cout << "Creation of origin player story\n";
+    printw("Creation of player story\n");
     initStatAssign();
 }
 
@@ -33,7 +33,7 @@ void Origin::initStatAssign()
         baseOriginStatVitality_ = 3;
         break;
     default:
-        std::cout << "Cannot find specified origin - assigning default values\n";
+        printw("Cannot find specified origin - assigning default values\n");
         baseOriginStatAim_ = 0;
         baseOriginStatCharisma_ = 0;
         baseOriginStatVitality_ = 0;
@@ -46,15 +46,21 @@ PlayerOrigin Origin::choosePlayerOrigin()
 {
     std::string userInput("");
     // Later we will make stories now we will only operate on debug values
-    std::cout << "What is thy story!\n";
-    std::cout << "1 I was kBasicAim as a child!\n";
-    std::cout << "2 I was kBasicVitality as a child!\n";
-    std::cout << "3 I was kBasicCharisma as a child!\n";
-    while(!InputCheck::isStringNumberInRange(InputCheck::helperInsertInputIntoContainer(userInput), 3));
+    printw("What is thy story!\n");
+    printw("1 I was kBasicAim as a child!\n");
+    printw("2 I was kBasicVitality as a child!\n");
+    printw("3 I was kBasicCharisma as a child!\n");
+    while(true)
     {
-        std::cout << "Please enter valid option!\n";
+        InputCheck::helperInsertInputIntoContainer(userInput);
+        if(InputCheck::isStringNumberInRange(userInput, 3))
+        {
+            break;
+        }
+        else
+        {
+            printw("Please enter a valid number!\n");
+        }
     }
-    std::cout << "Good outcome\n";
-    std::cin.ignore();
     return static_cast<PlayerOrigin>(std::stoi(userInput));
 }

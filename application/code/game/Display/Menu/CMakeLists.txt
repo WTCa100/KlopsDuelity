@@ -16,3 +16,4 @@ add_subdirectory(./SessionMainScreen)
 
 target_link_libraries(Menu PUBLIC Display)
 target_link_libraries(Menu PUBLIC InputCheck)
+target_link_libraries(Menu PUBLIC NIO)

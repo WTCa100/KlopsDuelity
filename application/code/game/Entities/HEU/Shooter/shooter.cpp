@@ -1,4 +1,5 @@
 #include <ctime>
+#include <ncurses.h>
 
 #include "./shooter.hpp"
 
@@ -32,18 +33,18 @@ namespace entities::HEUTypes
     Shooter::Shooter() : currentlyHeldWeapon_(new entities::weapons::muskets::springfield1835)
     {
         assingDefaultParemters(*this);
-        std::cout << "Shooter spawned\n";
+        printw("Shooter spawned\n"); 
     }
 
     Shooter::Shooter(bool isPlayer, std::string name) : HEU(isPlayer, name), currentlyHeldWeapon_(new entities::weapons::muskets::springfield1835)
     {
         assingDefaultParemters(*this);
-        std::cout << "Shooter spawned\n";
+        printw("Shooter spawned\n"); 
         if(isPlayer_)
         {
             // Unless save was loaded
             duelsWonCount_ = 0;
-            std::cout << "Shooter with " << hId_ << " is a player\n";
+            printw("Shooter with %d is a player\n", hId_);
             // TODO: Make player pick weapon his weapon
         }
         else
@@ -51,24 +52,24 @@ namespace entities::HEUTypes
             // Assing random value for now
             // Todo, make this number be close to player's 
             duelsWonCount_ = rand() % 301;
-            std::cout << "Shooter with " << hId_ << " is not a player\n";
+            printw("Shooter with %d is not a player\n", hId_);
         }
     }
 
 
     void Shooter::fireWeapon(Shooter* target, const double distance)
     {
-        std::cout << name_ << " fires his " << currentlyHeldWeapon_->getWeaponName() << std::endl;
-        std::cout << "He is aiming at: " << target->name_ << std::endl;
+        printw("%s fires his %s\n", name_.c_str(), currentlyHeldWeapon_->getWeaponName().c_str());
+        printw("He is aiming at: %s\n", target->name_.c_str());
         bool hasHit = currentlyHeldWeapon_->shoot(distance);
-        std::cout << "!DEBUG --- " << name_ << " has ";
+        printw("!DEBUG --- %s has ", name_.c_str());
         if(hasHit)
         {
             double hitPoints = this->currentlyHeldWeapon_->getWeaponBaseDmg() / distance;
-            std::cout << "hit his oponent!\n";
+            printw("Hits his oponent\n");
             // Dummy value for now
             target->health_ = target->health_ - hitPoints;
-            std::cout << "!DEBUG --- NEW HEALTH " << target->health_ << std::endl;
+            printw("!DEBUG --- NEW HEALTH %.2f\n", target->getHealth());
             if(target->health_ <= 0)
             {
                 target->isConcious_ = false;
@@ -80,7 +81,7 @@ namespace entities::HEUTypes
         }
         else
         {
-            std::cout << "not hit his oponent!\n";
+            printw("not hit his oponent\n");
         }
     }
 
@@ -88,18 +89,18 @@ namespace entities::HEUTypes
     {
         if(isPlayer_)
         {
-            std::cout << "Pick your weapon:";
-            std::cin.ignore();
+            printw("Pick your weapon: \n");
+            getch();
         }
 
-        std::cout << name_ << " said \" I will be using ";
+        printw("%s said \"I will be using ", name_.c_str());
         currentlyHeldWeapon_->present();
-        std::cout << " for our duel!\"\n";
+        printw(" for the duel!\"\n");
     }
     
     Shooter::~Shooter()
     {
-        std::cout << "Shooter " << hId_ << " (" << name_ << ") despawned\n";
+        printw("Shooter %d ( %s ) despawned", hId_, name_.c_str());
         delete currentlyHeldWeapon_;
     }
 } // namespace entities::HEUTypes

@@ -1,5 +1,7 @@
 #include "./springfield1835.hpp"
 
+#include <ncurses.h>
+
 namespace entities::weapons::muskets
 {
     springfield1835::springfield1835() : Weapon("Springfield model 1835")
@@ -7,17 +9,17 @@ namespace entities::weapons::muskets
         basePrice_ = 120;
         baseDmg_ = 60;
         baseAccuracy_ = 0.25;
-        std::cout << "Springfield created\n";
+        printw("Springfield model 1835 created\n");
     }
     
     void springfield1835::present()
     {
-        std::cout << name_;
+        printw("%s", name_.c_str());
     }
     
     springfield1835::~springfield1835()
     {
-        std::cout << "Springfield destroyed\n";
+        printw("Springfield model 1835 destroyed\n");
     }    
 } // namespace entities::weapons::muskets
 

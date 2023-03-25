@@ -1,10 +1,12 @@
 #include <iostream>
 
+#include <ncurses.h>
 
 #include "./Menu.hpp"
 
 // Get toolbox methods
 #include "../../../utilities/Toolbox/InputCheck/InputCheck.hpp"
+#include "../../../utilities/IOStream/NIO.hpp"
 
 // Get enities
 #include "../../Entities/HEU/heu.hpp"
@@ -12,19 +14,20 @@
 
 Menu::Menu() : actionChoosen_(MenuOptions::kNone)
 {
-    std::cout << "Menu :ctor:\n";
+    printw("Menu :ctor:\n");
 }
 
 void Menu::mainDisplay()
 {
     std::string userInput("");
-    std::cout << "Welcome to Klops Duelit!\n";
-    std::cout << "---- Main Menu ----\n";
-    std::cout << "1. Game\n";
-    std::cout << "2. Exit\n";
+    printw("Welcome to Klops Duelit!\n");
+    printw("---- Main Menu ----\n");
+    printw("1. Game\n");
+    printw("2. Exit\n");            
     while(!getUserInput(userInput))
     {
-        std::cout << "Please provide a valid answer\n";
+        printw("\n");
+        printw("Please provide a valid answer\n");
     }
     
     // Assign it to the action
@@ -34,11 +37,11 @@ void Menu::mainDisplay()
 
 bool Menu::getUserInput(std::string& userInput)
 {
-    std::getline(std::cin, userInput);
+    NI::getline(userInput);
     return InputCheck::isStringNumberInRange(userInput, 2);
 }
 
 Menu::~Menu()
 {
-    std::cout << "Menu :dtor:\n";
+    printw("Menu :dtor:\n");
 }

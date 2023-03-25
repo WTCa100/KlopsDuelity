@@ -1,31 +1,37 @@
 #include "./session.hpp"
 
+// Get ncruses
+#include <ncurses.h>
+#include "../../utilities/IOStream/NIO.hpp"
+
 #include "../Entities/HEU/Shopkeeper/shopkeeper.hpp"
 
 Session::Session() : mainCharacter_(nullptr), fighting_(nullptr)
 {
-    std::cout << "Session starts\n";
+    printw("Session starts\n");
 }
 
 Session::~Session()
 {
     // When the real game will be implemented we will parse entity lists and destroy them
     // Excempt player weapons.
-    std::cout << "Teardown\n";
+    printw("Teardown\n");
     for(auto entity : heuCount_)
     {
-        std::cout << "Teardown entity: \n";
+        printw("Teardown entity\n");
         delete entity;
     }
 
-    std::cout << "Session ends\n";
+    printw("Session ends\n");
 }
 
 void Session::characterCreation()
 {
     std::string playerName;
-    std::cout << "Enter you name!\n";
-    std::getline(std::cin, playerName);
+    printw("Enter your name!\n");
+    NI::getline(playerName);
+    printw("%s name - %d length\n", playerName.c_str(), playerName.length());
+    getch();
     mainCharacter_ = new Player(playerName);
 }
 
@@ -63,7 +69,7 @@ void Session::core()
 
 void Session::duel()
 {
-    std::cout << "!-- Debug prepare variables for duel\n";
+    printw("!-- Debug prepare variables for duel\n");
     entities::HEUTypes::Shooter* enemy = new entities::HEUTypes::Shooter(false, "RandomName");
     heuCount_.push_back(enemy); heuCount_.push_back(mainCharacter_);
     fighting_ = new Duel(mainCharacter_, enemy);
@@ -71,9 +77,9 @@ void Session::duel()
     fighting_->shootOut();
 
     // After game show health of the oponents
-    std::cout << "!-- Deubg main character health: " << mainCharacter_->getHealth() << std::endl;
-    std::cout << "!-- Deubg enemy character health: " << enemy->getHealth() << std::endl;
+    printw("!-- Debug player character health: %.2f\n", mainCharacter_->getHealth());
+    printw("!-- Debug Enemy character health: %.2f\n", enemy->getHealth());
 
-    std::cout << "!!Duel ends!!\n";
+    printw("Duel ends!\n");
     
 }

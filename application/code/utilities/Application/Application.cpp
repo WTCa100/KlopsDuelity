@@ -4,10 +4,12 @@
 #include "../../game/Display/Menu/Menu.hpp"
 #include "../../game/Session/session.hpp"
 
+#include <ncurses.h>
 
 Application::Application()
 {
-    std::cout << "Application :ctor:\n";
+    printw("Application :ctor:\n");
+    refresh();
 }
 
 Application* Application::getInstance()
@@ -42,7 +44,8 @@ void Application::startApp()
     }
     else // Close app
     {
-        std::cout << "Closing\n";
+        printw("Application closing\n");
+        refresh();        
         return;
     }
 
@@ -51,7 +54,7 @@ void Application::startApp()
 
 Application::~Application()
 {
-    std::cout << "Application :dtor:\n";
+    printw("Application :dtor:\n");
 }
 
 Application* Application::instance_ = nullptr;

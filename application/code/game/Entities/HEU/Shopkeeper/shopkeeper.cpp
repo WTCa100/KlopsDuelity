@@ -7,13 +7,7 @@ namespace entities::HEUTypes
 
     void Shopkeeper::presentItems()
     {
-        // Initialize ncurses
-        initscr();
-        refresh(); // Match screen refresh
-        keypad(stdscr, TRUE); // Enable keypad 
-        cbreak(); // Enbale line buffering
-        noecho(); // Disable input echoing
-
+        noecho();
         int itemId = 0;
         bool exitLoop = false;
         while(!exitLoop)
@@ -64,7 +58,7 @@ namespace entities::HEUTypes
             refresh();
         }
 
-        endwin();
+        echo();
     }
 
     void Shopkeeper::showItem(int itemId)
@@ -95,7 +89,7 @@ namespace entities::HEUTypes
             return false;
         }
 
-        printw("You have bought %s\n", desiredWeapon->getWeaponName());
+        printw("You have bought %s\n", desiredWeapon->getWeaponName().c_str());
         return true;
 
     }
@@ -108,12 +102,12 @@ namespace entities::HEUTypes
 
     Shopkeeper::Shopkeeper(Player* customer) : HEU(false, "no_name_entity"), customer_(customer)
     {
-        std::cout << customer_->getEntityName() << " Entered shop: Shopkeeper spawned\n";
+        printw("%s Entered shop: Shopkeeper spaned", customer->getEntityName().c_str());
         weaponsForSale_ = {std::make_pair(new entities::weapons::muskets::springfield1835, false) /*Add more weapons later*/};
     }
     Shopkeeper::~Shopkeeper()
     {
-        std::cout << "Keeper despawned\n";
+        printw("Shopowner dispwaned\n");
         // Delete evry pointer that was not sold (other pointers will be deleted later)
         for(auto weapon : weaponsForSale_)
         {

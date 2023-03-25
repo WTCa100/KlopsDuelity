@@ -16,7 +16,6 @@ namespace Menus
             townDisp->mainDisplay();
             printw("Use arrow keys to move\n");
             printw("Press 'q' to quit\n");
-            refresh();
             int input = getch();
             switch (input)
             {
@@ -42,25 +41,9 @@ namespace Menus
                 break;
             }
             clear();        
-            refresh();
         }        
     }
 
-    SessionMainScreen::SessionMainScreen()
-    {
-        // Initialize Ncurses
-        initscr();
-        refresh(); // Match screen refresh
-        keypad(stdscr, TRUE); // Enable keypad 
-        cbreak(); // Enbale line buffering
-        noecho(); // Disable input echoing        
-    }
-
-    SessionMainScreen::~SessionMainScreen()
-    {
-        // Destruct Ncurses
-        clear();
-        refresh();
-        endwin();
-    }
+    SessionMainScreen::SessionMainScreen() = default;
+    SessionMainScreen::~SessionMainScreen() = default;
 } // namespace Menus

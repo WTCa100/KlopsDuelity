@@ -1,11 +1,16 @@
 #include "./InputCheck.hpp"
 
+// Get ncurses methods
+#include <ncurses.h>
+#include "../../IOStream/NIO.hpp" // For NI::getline()
+
 #include <sstream>
 #include <iostream>
 #include <algorithm>
 
 bool InputCheck::isStringNumber(const std::string& input)
 {
+    printw("Checking if string is a number...\n");
     return !input.empty() && input.find_first_not_of("0123456789") == std::string::npos;
 }
 
@@ -14,7 +19,7 @@ bool InputCheck::isStringNumber(const std::string& input)
 /// @return the same container with assigned value
 std::string InputCheck::helperInsertInputIntoContainer(std::string& container)
 {
-    std::getline(std::cin, container);    
+    NI::getline(container);    
     return container;
 }
 

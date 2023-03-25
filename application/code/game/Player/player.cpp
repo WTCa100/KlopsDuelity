@@ -1,5 +1,7 @@
 #include "./player.hpp"
 
+#include <ncurses.h>
+
 // get toolbox
 #include "../../utilities/Toolbox/InputCheck/InputCheck.hpp"
 // get modifiers
@@ -12,7 +14,7 @@ Player::Player(std::string name) : Shooter(true, name), money_(100), pOrigin_(ne
     // Make player choose starting weapon later / weapon will be determined on origin (preferable)
     weaponsOwned_.push_back(new entities::weapons::muskets::springfield1835);
     getStatsFromOrigin();   
-    std::cout << "Player created\n";
+    printw("Player created!\n");
 }
 
 void Player::addWeapon(Weapon* newWeapon)
@@ -22,7 +24,7 @@ void Player::addWeapon(Weapon* newWeapon)
 
 void Player::getStatsFromOrigin()
 {
-    std::cout << "Assigning stats to: " << name_ << std::endl; 
+    printw("Assign stats to %s\n", this->name_.c_str());
     this->statAim_ = pOrigin_->getBaseOriginStatAim();
     this->statCharisma_ = pOrigin_->getBaseOriginStatChraisma();
     this->statVitality_ = pOrigin_->getBaseOriginStatVitality();
@@ -33,7 +35,7 @@ void Player::getStatsFromOrigin()
 
 Player::~Player()
 {
-    std::cout << "Player despawned\n";
+    printw("Player despawned\n");
     for(auto weapon : weaponsOwned_)
     {
         delete weapon;

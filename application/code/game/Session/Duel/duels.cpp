@@ -8,9 +8,9 @@
 Duel::Duel(Player* player, Shooter* oponent) : player_(player), oponent_(oponent), distance_(12)
 {
     calculateReward();
-    std::cout << "Stake is: " << reward_;
-    std::cout << "Duel stars.\n";
-    std::cout << player_->getEntityName() << " VS " << oponent_->getEntityName() << std::endl;
+    printw("Stake is: %.2f$\n", reward_);
+    printw("Duel starts!\n");
+    printw("%s VS %s\n", player_->getEntityName().c_str(), oponent_->getEntityName().c_str());
 }
 
 void Duel::calculateReward()
@@ -31,7 +31,7 @@ void Duel::calculateReward()
 
 void Duel::prepareForFight()
 {
-    std::cout << "Pick your weapons!\n";
+    printw("Prepare your weapons!\n");
     if(player_)
     {
         player_->pickWeapon();
@@ -49,17 +49,17 @@ Shooter* Duel::shootOut()
     int round = 0;
     while((player_->isConcious_ && oponent_->isConcious_) /*|| surrender was choosen*/ && round < 10)
     {
-        std::cout << "Round: " << round + 1 << std::endl;
+        printw("Round %d\n", round + 1);
         changeDistance();
-        std::cout << "!-- Debug: Player health" << player_->health_ << std::endl;
-        std::cout << "!-- Debug: Enemy health" << oponent_->health_ << std::endl;
-        round == 0 ? std::cout << "First move goes to " << player_->name_ << std::endl : 
-                 std::cout << "It's " << player_->name_ << "s turn\n";
+        printw("!--- Debug: Player health %d\n", player_->health_);
+        printw("!--- Debug: Enemy health %d\n", oponent_->health_);
+        round == 0 ? printw("First turn goes to %s\n", player_->name_.c_str()) : 
+                     printw("The turn goes to %s", player_->name_.c_str());
         player_->fireWeapon(oponent_, distance_);
-        std::cout << "It's " << oponent_->name_ << "s turn\n";        
+        printw("It's %s\'s turn\n", oponent_->name_.c_str());        
         oponent_->fireWeapon(player_, distance_);
-        std::cout << "Press any key to continue\n";
-        std::cin.ignore();
+        printw("Press any key to continue...\n");
+        getch();
         round++;
     }
 
@@ -69,12 +69,8 @@ Shooter* Duel::shootOut()
 
 void Duel::changeDistance()
 {
-    std::cout << "!-- DEBUG: Adjusting of distance\n";
-    // Initialize ncurses
-    initscr();
-    refresh(); // Match screen refresh
+    printw("!DEBUG --- Adjusting of distance\n");
     keypad(stdscr, TRUE); // Enable keypad 
-    cbreak(); // Enbale line buffering
     noecho(); // Disable input echoing
 
     int input = 0;
@@ -106,7 +102,6 @@ void Duel::changeDistance()
                 if(distance_ == 1)
                 {
                     printw("Distance cannot be lower than 1!\n");
-                    refresh();
                     getch();
                     break;
                 }            
@@ -119,33 +114,27 @@ void Duel::changeDistance()
                 break;
             default:
                 printw("Please use arrow keys to move!\n");
-                refresh(); 
                 getch();
                 break;
         }
 
         // TODO: Make screen refresh here is possible
         clear();
-        refresh();
 
         // Check if exit
         if(exitLoop)
         {
-            printw("Distance adjusted!\n");
-            refresh();            
+            printw("Distance adjusted!\n");           
             break;
         }
 
     }
     printw("!--- DEBUG: NCURSER: INPUT: %d\n", input);
     printw("Press any key to continue...\n");
-    refresh();
     getch();
     clear();
-    refresh();
-    endwin();
-    std::cout << "!--- DEBUG: DISTANCE " << distance_ << std::endl;
-    std::cin.ignore();
+    echo();
+    printw("! --- DEBUG: Distance: %d", distance_);
 }
 
 void Duel::announceWinner()
@@ -154,29 +143,29 @@ void Duel::announceWinner()
     if(player_->health_ < oponent_->health_)
     {
         winner_ = oponent_;
-        std::cout << oponent_->getEntityName() << " has won!\n";
+        printw("%s has won!\n", oponent_->name_.c_str());
         if(player_->isDead_)
         {
-            std::cout << "You literally died\n";
+            printw("You literally died\n");
         }
     }
     else if(player_->health_ == oponent_->health_)
     {
         winner_ = nullptr;
-        std::cout << "No one has one this duel, it's a tie!\n";
+        printw("No one has one a duel, it's a tie!\n");
     }
     else
     {
         winner_ = player_;
-        std::cout << player_->name_ << " has won!\n";
+        printw("%s has won!\n", player_->name_.c_str());
         if(oponent_->isDead_)
         {
-            std::cout << "You killed that guy!\n";
+            printw("You killed that guy!\n");
         }
     }
 }
 
 Duel::~Duel()
 {
-    std::cout << "Duel concluded. " << winner_->name_ << " won!\n" ;
+    printw("Duel has concluded %s won!\n", winner_->name_.c_str());
 }
