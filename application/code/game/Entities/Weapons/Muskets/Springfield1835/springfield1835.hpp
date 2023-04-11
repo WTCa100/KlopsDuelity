@@ -7,14 +7,12 @@
 namespace entities::weapons::muskets
 {
 
-    class springfield1835 : public Weapon
+    class Springfield1835 : public Weapon
     {   
-    private:
-        /* data */
-    public:
-        springfield1835();
+        public:
+        Springfield1835();
         void present() override;
-        ~springfield1835();
+        ~Springfield1835();
     };  
     
 

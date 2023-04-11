@@ -22,4 +22,5 @@ target_link_libraries(${PROJECT_NAME}
     shopkeeper
     weapon
     springfield1835
+    moukahla
 )

@@ -13,6 +13,11 @@
 // Menus
 #include "../Display/Menu/SessionMainScreen/SessionMainScreen.hpp"
 
+enum class oponentDifficulty{
+    kEasy      = 1,
+    kMediocore = 2,
+    kHard      = 3
+};
 
 class Session
 {
@@ -24,6 +29,8 @@ class Session
     Player* mainCharacter_;
 
     public:
+    entities::HEUTypes::Shooter* pickOponent();
+    entities::HEUTypes::Shooter* generateOponent(oponentDifficulty difLvl);
     void core();
     void characterCreation();
     void shop();

@@ -7,7 +7,6 @@
 // Get abstraction
 #include "../../Entities/HEU/heu.hpp"
 #include "../../Entities/Weapons/weapons.hpp"
-#include "../../Entities/Weapons/Muskets/Springfield1835/springfield1835.hpp"
 // Get concrete classes
 #include "../../Entities/HEU/Shooter/shooter.hpp"
 #include "../../Player/player.hpp"

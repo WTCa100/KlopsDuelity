@@ -50,8 +50,26 @@ namespace NI
 
         printw("\n");
         
+        trimWhiteSpaces(input);
+
         echo();
         return input.length(); // return the length of the input string
+    }
+
+    void trimWhiteSpaces(std::string& uglyString)
+    {
+        // Remove spaces from the back
+        while(uglyString[uglyString.size() - 1] == ' ' && !uglyString.empty())
+        {
+            uglyString.pop_back();
+        }
+
+        // Remove spaces from frnt
+        while(uglyString[0] == ' ' && !uglyString.empty())
+        {
+            uglyString.erase(uglyString.begin());
+        }
+
     }
 
 } // namespace NI

@@ -10,4 +10,8 @@ namespace Modifiers
 
     extern double calculateAccuracy(const double& baseAccuracy, const double& distance);
 
+    extern int calculateEntityPower(const int& entityAim, const int& entityVitality, const int& entityCharisma);
+    
+    extern int calculateWeaponPower(const double& weaponBaseAccuracy = 0.0, const double& weaponBaseDamage = 0.0);
+
 } // namespace Modifiers

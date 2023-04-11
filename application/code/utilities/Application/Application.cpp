@@ -49,6 +49,7 @@ void Application::startApp()
         return;
     }
 
+    delete mainMenu;
     // Create session
 }
 

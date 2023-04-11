@@ -29,6 +29,8 @@ namespace entities
 
         // Getters
         std::string getEntityName() const { return name_;}
+        int getEntityId() const { return hId_; }
+
         HEU();
         HEU(bool isPlayer, std::string name);
         virtual ~HEU();

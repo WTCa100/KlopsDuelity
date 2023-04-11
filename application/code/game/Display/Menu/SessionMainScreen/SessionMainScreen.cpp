@@ -42,6 +42,8 @@ namespace Menus
             }
             clear();        
         }        
+
+        delete townDisp;
     }
 
     SessionMainScreen::SessionMainScreen() = default;

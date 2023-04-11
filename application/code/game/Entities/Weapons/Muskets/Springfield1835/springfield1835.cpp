@@ -4,7 +4,7 @@
 
 namespace entities::weapons::muskets
 {
-    springfield1835::springfield1835() : Weapon("Springfield model 1835")
+    Springfield1835::Springfield1835() : Weapon("Springfield model 1835")
     {
         basePrice_ = 120;
         baseDmg_ = 60;
@@ -12,12 +12,12 @@ namespace entities::weapons::muskets
         printw("Springfield model 1835 created\n");
     }
     
-    void springfield1835::present()
+    void Springfield1835::present()
     {
         printw("%s", name_.c_str());
     }
     
-    springfield1835::~springfield1835()
+    Springfield1835::~Springfield1835()
     {
         printw("Springfield model 1835 destroyed\n");
     }    

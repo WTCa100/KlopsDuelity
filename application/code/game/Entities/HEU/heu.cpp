@@ -34,6 +34,7 @@ namespace entities
     HEU::~HEU()
     {
         printw("Destruction of Hman Entity Unit\n");
+        getch();
     }
 
     uint32_t HEU::hIdGlobal_ = 0;

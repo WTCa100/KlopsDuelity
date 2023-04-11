@@ -47,10 +47,11 @@ void Duel::prepareForFight()
 Shooter* Duel::shootOut()
 {
     int round = 0;
-    while((player_->isConcious_ && oponent_->isConcious_) /*|| surrender was choosen*/ && round < 10)
+    while((player_->isConcious_ && oponent_->isConcious_) /*|| surrender was choosen*/ && round < 2)
     {
         printw("Round %d\n", round + 1);
         changeDistance();
+        printw("! --- DEBUG: Distance: %.2f\n", distance_);        
         printw("!--- Debug: Player health %d\n", player_->health_);
         printw("!--- Debug: Enemy health %d\n", oponent_->health_);
         round == 0 ? printw("First turn goes to %s\n", player_->name_.c_str()) : 
@@ -129,12 +130,8 @@ void Duel::changeDistance()
         }
 
     }
-    printw("!--- DEBUG: NCURSER: INPUT: %d\n", input);
-    printw("Press any key to continue...\n");
-    getch();
     clear();
     echo();
-    printw("! --- DEBUG: Distance: %d", distance_);
 }
 
 void Duel::announceWinner()

@@ -28,15 +28,25 @@ namespace entities::HEUTypes
             modifyShooter.health_ = modifyShooter.healthMax_;
         }
 
+        if(modifyShooter.currentlyHeldWeapon_)
+        {
+            power_ = Modifiers::calculateEntityPower(modifyShooter.statAim_, modifyShooter.statVitality_, modifyShooter.statCharisma_) + 
+                     Modifiers::calculateWeaponPower(modifyShooter.currentlyHeldWeapon_->getWeaponBaseAccuracy(), modifyShooter.currentlyHeldWeapon_->getWeaponBaseDmg());
+        }
+        else
+        {
+            power_ = Modifiers::calculateEntityPower(modifyShooter.statAim_, modifyShooter.statVitality_, modifyShooter.statCharisma_);
+        }
+
     }
 
-    Shooter::Shooter() : currentlyHeldWeapon_(new entities::weapons::muskets::springfield1835)
+    Shooter::Shooter() : currentlyHeldWeapon_(nullptr)
     {
         assingDefaultParemters(*this);
         printw("Shooter spawned\n"); 
     }
 
-    Shooter::Shooter(bool isPlayer, std::string name) : HEU(isPlayer, name), currentlyHeldWeapon_(new entities::weapons::muskets::springfield1835)
+    Shooter::Shooter(bool isPlayer, std::string name) : HEU(isPlayer, name), currentlyHeldWeapon_(nullptr)
     {
         assingDefaultParemters(*this);
         printw("Shooter spawned\n"); 
@@ -46,16 +56,64 @@ namespace entities::HEUTypes
             duelsWonCount_ = 0;
             printw("Shooter with %d is a player\n", hId_);
             // TODO: Make player pick weapon his weapon
+            // Note: Currently held weapon will always be the weapon that provides the greates ammount of power
+            // Unless it's a duel situation 
         }
         else
         {
-            // Assing random value for now
-            // Todo, make this number be close to player's 
-            duelsWonCount_ = rand() % 301;
             printw("Shooter with %d is not a player\n", hId_);
         }
     }
 
+
+    void Shooter::setStats(const int& newStatAim, const int& newStatVitality, const int& newStatCharisma)
+    {  
+        statAim_ = newStatAim;
+        statVitality_ = newStatVitality;
+        // Adjust max/current health
+        healthMax_ = Modifiers::calculateHealth(statVitality_);
+        health_    = Modifiers::calculateHealth(statVitality_);
+        statCharisma_ = newStatCharisma;
+
+        evaluatePower();
+    }
+
+    void Shooter::evaluatePower()
+    {
+        // Check if entity has weapons
+        if(currentlyHeldWeapon_)
+        {
+            power_ = Modifiers::calculateEntityPower(statAim_, statVitality_, statCharisma_) + 
+                     Modifiers::calculateWeaponPower(currentlyHeldWeapon_->getWeaponBaseAccuracy(), currentlyHeldWeapon_->getWeaponBaseDmg());
+        }
+        else
+        {
+            power_ = Modifiers::calculateEntityPower(statAim_, statVitality_, statCharisma_);
+        }
+
+        printw("!DEBUG --- New Power %d\n", power_);
+    }
+
+    void Shooter::setStatVit(const int& newStatVit) 
+    { 
+        statVitality_ = newStatVit;
+        // Adjust max/current health        
+        healthMax_ = Modifiers::calculateHealth(statVitality_);
+        health_    = Modifiers::calculateHealth(statVitality_); 
+        evaluatePower();
+    }    
+
+    void Shooter::setStatCharisma(const int& newStatCharisma)
+    {
+        statCharisma_ = newStatCharisma;
+        evaluatePower();
+    }
+
+    void Shooter::setStatAim(const int& newStatAim)
+    {
+        statAim_ = newStatAim;
+        evaluatePower();
+    }
 
     void Shooter::fireWeapon(Shooter* target, const double distance)
     {
@@ -98,9 +156,19 @@ namespace entities::HEUTypes
         printw(" for the duel!\"\n");
     }
     
+    void Shooter::setCurrentlyHeldWeapon(entities::Weapon* newWeapon)
+    {
+        currentlyHeldWeapon_ = newWeapon;
+        evaluatePower();
+    }
+
     Shooter::~Shooter()
     {
         printw("Shooter %d ( %s ) despawned", hId_, name_.c_str());
-        delete currentlyHeldWeapon_;
+        if(currentlyHeldWeapon_)
+        {
+            delete currentlyHeldWeapon_;
+        }
     }
+
 } // namespace entities::HEUTypes

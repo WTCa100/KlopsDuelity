@@ -24,5 +24,14 @@ namespace Modifiers
         return (baseAccuracy * 10) * (100 / distance);
     }
 
+    int calculateEntityPower(const int& entityAim, const int& entityVitality, const int& entityCharisma)
+    {
+        return entityAim * 100 + entityVitality * 36 + entityCharisma * 12;
+    }
+
+    int calculateWeaponPower(const double& weaponBaseAccuracy = 0.0, const double& weaponBaseDamage = 0.0)
+    {
+        return weaponBaseAccuracy * 5 + weaponBaseDamage * 5;
+    }
 
 } // namespace Modifiers

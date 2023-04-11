@@ -23,13 +23,22 @@ void Menu::mainDisplay()
     printw("Welcome to Klops Duelit!\n");
     printw("---- Main Menu ----\n");
     printw("1. Game\n");
-    printw("2. Exit\n");            
+    printw("2. Exit\n");          
+    printw("------------------ \n");
+    printw("Option: ");
     while(!getUserInput(userInput))
     {
-        printw("\n");
         printw("Please provide a valid answer\n");
+        printw("Press any key to continue...\n");
+        getch();
+        clear();
+        printw("Welcome to Klops Duelit!\n");
+        printw("---- Main Menu ----\n");
+        printw("1. Game\n");
+        printw("2. Exit\n");        
+        printw("------------------ \n");     
+        printw("Option: ");               
     }
-    
     // Assign it to the action
     actionChoosen_ = static_cast<MenuOptions>(std::stoi(userInput));
 
