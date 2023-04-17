@@ -2,6 +2,9 @@
 
 #include "./shopkeeper.hpp"
 
+// Import every weapon
+#include "../../Weapons/Muskets/Springfield1835/springfield1835.hpp"
+#include "../../Weapons/Muskets/Moukahla/moukahla.hpp"
 namespace entities::HEUTypes
 {
 
@@ -63,6 +66,7 @@ namespace entities::HEUTypes
 
     void Shopkeeper::showItem(int itemId)
     {
+        // Show it visually 
         Weapon* selectedWeapon = weaponsForSale_[itemId].first;
         printw("Weapon: %s\n", selectedWeapon->getWeaponName().c_str());
         printw("Base Dmg: %.2f\n", selectedWeapon->getWeaponBaseDmg());
@@ -103,7 +107,12 @@ namespace entities::HEUTypes
     Shopkeeper::Shopkeeper(Player* customer) : HEU(false, "no_name_entity"), customer_(customer)
     {
         printw("%s Entered shop: Shopkeeper spawned", customer->getEntityName().c_str());
-        weaponsForSale_ = {std::make_pair(new entities::weapons::muskets::Springfield1835, false) /*Add more weapons later*/};
+        weaponsForSale_ = 
+        {
+            std::make_pair(new entities::weapons::muskets::Springfield1835, false),
+            std::make_pair(new entities::weapons::muskets::Moukahla, false)
+            /*Add more weapons later*/
+        };
     }
     Shopkeeper::~Shopkeeper()
     {

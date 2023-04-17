@@ -16,6 +16,8 @@ class Duel
 friend class entities::HEU;
 private:
     double reward_;
+    int expReward_;
+    int shotCount_;
     Player* player_;
     Shooter* oponent_;
     Shooter* winner_;
@@ -23,6 +25,7 @@ private:
     double distance_;
     void changeDistance();
     void calculateReward();
+    
 public:
     void prepareForFight();
     Shooter* shootOut();

@@ -56,7 +56,6 @@ namespace NI
         trimWhiteSpaces(input);
 
         echo();
-        printw("!--- Debug: string input: %s\n", input.c_str());
         return input.length(); // return the length of the input string
     }
 

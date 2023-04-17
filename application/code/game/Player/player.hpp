@@ -21,12 +21,26 @@ class Player : public Shooter
     const Origin* pOrigin_;
     std::vector<Weapon*> weaponsOwned_; 
     void getStatsFromOrigin();
+
+    int level_;
+    int requiredExp_;
+    int exp_;
+
     public:
+    void levelUp();
+    bool checkForLevelUp();
+    void giveExp(int exp);
+    void addWeapon(Weapon* newWeapon);
+
+    // Getters
     size_t getWeaponsOwnedSize() const { return weaponsOwned_.size(); }
     std::vector<Weapon*> getWeaponsOwned() const { return weaponsOwned_; }
-    void addWeapon(Weapon* newWeapon);
     double getMoney() const { return money_; }
+    int getLevel() const {return level_; }
+    int getExp() const {return exp_; }
+    int getRequiredExp() const { return requiredExp_; }
 
+    // Setters
     void setMoney(const double& money) { money_ = money;}
 
     Player(std::string name);

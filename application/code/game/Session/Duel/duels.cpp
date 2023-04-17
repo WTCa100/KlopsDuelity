@@ -57,6 +57,8 @@ Shooter* Duel::shootOut()
         round == 0 ? printw("First turn goes to %s\n", player_->name_.c_str()) : 
                      printw("The turn goes to %s", player_->name_.c_str());
         player_->fireWeapon(oponent_, distance_);
+        shotCount_++;
+
         printw("It's %s\'s turn\n", oponent_->name_.c_str());        
         oponent_->fireWeapon(player_, distance_);
         printw("Press any key to continue...\n");
@@ -136,7 +138,9 @@ void Duel::changeDistance()
 
 void Duel::announceWinner()
 {
-    // This is due to be changed but for now whoever has the bigger hp wins.    
+    // This is due to be changed but for now whoever has the bigger hp wins.
+    bool hasPlayerWon = false;
+    bool wasTie = false;
     if(player_->health_ < oponent_->health_)
     {
         winner_ = oponent_;
@@ -148,11 +152,13 @@ void Duel::announceWinner()
     }
     else if(player_->health_ == oponent_->health_)
     {
+        wasTie = true;
         winner_ = nullptr;
         printw("No one has one a duel, it's a tie!\n");
     }
     else
     {
+        hasPlayerWon = true;
         winner_ = player_;
         printw("%s has won!\n", player_->name_.c_str());
         if(oponent_->isDead_)
@@ -160,9 +166,22 @@ void Duel::announceWinner()
             printw("You killed that guy!\n");
         }
     }
+
+    bool wasOneShot = false;
+    if(shotCount_ == 1 && oponent_->isDead_)
+    {
+        wasOneShot = true;
+    }
+
+    expReward_ = Modifiers::calculateExpReward(oponent_->getPower(), shotCount_, distance_, hasPlayerWon, oponent_->isDead_, wasOneShot, wasTie);
+
 }
 
 Duel::~Duel()
 {
     printw("Duel has concluded %s won!\n", winner_->name_.c_str());
+    if(!player_->isDead_)
+    {
+        player_->giveExp(expReward_);
+    }
 }

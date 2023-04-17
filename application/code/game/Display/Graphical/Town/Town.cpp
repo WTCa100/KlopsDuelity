@@ -12,8 +12,8 @@ namespace Graphics
         printw("|                 |             |                                  |\n");
         printw("|                 |  A R E N A  |                                  |\n");
         printw("|                 |_____________|                                  |\n");
-        printw("|                /              \\                                 |\n");
-        printw("|               /                \\                                |\n");
+        printw("|                /              \\                                  |\n");
+        printw("|               /                \\                                 |\n");
         printw("|                 |    | -- |   |                                  |\n");
         printw("|                                             _____________        |\n");
         printw("|                                            |             |       |\n");

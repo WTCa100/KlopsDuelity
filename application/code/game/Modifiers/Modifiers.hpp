@@ -14,4 +14,10 @@ namespace Modifiers
     
     extern int calculateWeaponPower(const double& weaponBaseAccuracy = 0.0, const double& weaponBaseDamage = 0.0);
 
+    extern int calculateRequiredExp(const int& nextLevel, const int& requiredExp);
+
+    extern int calculateExpReward(int enemyPower, const double& shotsFired, const int& distance, 
+                                  const bool& hasWon = true, const bool& hasEnemyDied = false,
+                                  const bool& wasOneShot = false, const bool& wasTie = false);
+
 } // namespace Modifiers

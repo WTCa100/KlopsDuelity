@@ -6,10 +6,8 @@
 
 #include "../heu.hpp"
 #include "../../../Player/player.hpp"
-
-// Import every weapon
 #include "../../Weapons/weapons.hpp"
-#include "../../Weapons/Muskets/Springfield1835/springfield1835.hpp"
+
 
 namespace entities::HEUTypes
 {

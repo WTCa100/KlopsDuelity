@@ -2,6 +2,9 @@
 
 #include <ncurses.h>
 
+// Testing leveling 
+#include <ctime>
+
 // get toolbox
 #include "../../utilities/Toolbox/InputCheck/InputCheck.hpp"
 // get modifiers
@@ -10,11 +13,45 @@
 #include "../Entities/Weapons/Muskets/Springfield1835/springfield1835.hpp"
 #include "../Entities/Weapons/Muskets/Moukahla/moukahla.hpp"
 
-Player::Player(std::string name) : Shooter(true, name), money_(100), pOrigin_(new Origin)
+Player::Player(std::string name) : Shooter(true, name), money_(100), pOrigin_(new Origin), level_(1), exp_(0), requiredExp_(1000)
 {
     // Make player choose starting weapon later / weapon will be determined on origin (preferable)
     getStatsFromOrigin();   
     printw("Player created!\n");
+}
+
+void Player::giveExp(int exp)
+{
+    exp_ += exp;
+    if(checkForLevelUp())
+    {
+        levelUp();
+    }
+    printw("Got %d exp\n", exp);
+    printw("You know have %d exp\n", exp_);
+    printw("Next level at: %d exp\n", requiredExp_);
+}
+
+bool Player::checkForLevelUp()
+{
+    if(exp_ >= requiredExp_)
+    {
+        return true;
+    }
+    return false;
+}
+
+void Player::levelUp()
+{
+    // increment from get go
+    printw("Leveled up to %d!\n", ++level_);
+    if(exp_ > requiredExp_)
+    {
+        exp_ = exp_ - requiredExp_;
+    }
+
+    requiredExp_ = Modifiers::calculateRequiredExp(level_, requiredExp_);
+    printw("Next level at: %d exp\n", requiredExp_);
 }
 
 void Player::addWeapon(Weapon* newWeapon)
@@ -40,13 +77,9 @@ void Player::getStatsFromOrigin()
 Player::~Player()
 {
     printw("Player despawned\n");
-    printw("segFault Fix#4\n");
-    printw("Size: %d\n", weaponsOwned_.size());
     getch();
     for(auto weapon : weaponsOwned_)
     {
-        printw("GETTING INTO WEAPONRY segFaultFix#5\n");
-        printw("NAME: %s", weapon->getWeaponName().c_str());
         getch();
         // The currently held weapon will be deleted later when the Shooter instance will get destroyed
         if(getCurrentlyHeldWeapon()->getWeaponName() != weapon->getWeaponName())

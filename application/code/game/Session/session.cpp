@@ -75,8 +75,6 @@ void Session::core()
     }
 
     delete mainSessionDisplay;
-    printw("Exit segFault fix#1\n");
-    getch();
 }
 
 entities::HEUTypes::Shooter* Session::generateOponent(oponentDifficulty difLvl)
