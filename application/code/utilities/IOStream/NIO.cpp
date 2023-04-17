@@ -22,7 +22,10 @@ namespace NI
                     cursor_pos--;
                     move(getcury(stdscr), getcurx(stdscr) - 1);
                     delch();
-                    move(getcury(stdscr), getcurx(stdscr) - (input.length() - cursor_pos));
+                    if(cursor_pos == input.length())
+                    {
+                        move(getcury(stdscr), getcurx(stdscr) - (input.length() - cursor_pos));
+                    }
                 }
             } else if (ch == KEY_LEFT) {  // move cursor left
                 if (cursor_pos > 0) {
@@ -53,6 +56,7 @@ namespace NI
         trimWhiteSpaces(input);
 
         echo();
+        printw("!--- Debug: string input: %s\n", input.c_str());
         return input.length(); // return the length of the input string
     }
 
