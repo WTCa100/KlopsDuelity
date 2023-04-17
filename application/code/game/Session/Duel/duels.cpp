@@ -183,5 +183,6 @@ Duel::~Duel()
     if(!player_->isDead_)
     {
         player_->giveExp(expReward_);
+        player_->setHealth(player_->getMaxHealth());
     }
 }
