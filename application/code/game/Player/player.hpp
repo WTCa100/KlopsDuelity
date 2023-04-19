@@ -21,6 +21,7 @@ class Player : public Shooter
     const Origin* pOrigin_;
     std::vector<Weapon*> weaponsOwned_; 
     void getStatsFromOrigin();
+    void levelStat();
 
     int level_;
     int requiredExp_;

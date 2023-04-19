@@ -15,9 +15,22 @@ int main()
     // Initialize ncurses
     initscr();
     refresh(); // Match screen refresh
-    keypad(stdscr, TRUE); // Enable keypad 
     cbreak(); // Enbale line buffering
+    keypad(stdscr, TRUE); // Enable keypad
 
+    // TODO try to implement continiously running function that allows to scroll the terminal window
+    // For now on this will be left as comments 
+    //scrollok(stdscr, TRUE);  
+    //mousemask(ALL_MOUSE_EVENTS, NULL); // Enable mouse events
+   
+    // Test
+    for(int i = 0; i < 100; i++)
+    {
+        printw("TEST%d\n", i);
+    }
+    getch();
+
+    // This is vim test
     printw("Hello world!\n");
     
     Application* gameApp = Application::getInstance();

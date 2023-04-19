@@ -52,6 +52,119 @@ void Player::levelUp()
 
     requiredExp_ = Modifiers::calculateRequiredExp(level_, requiredExp_);
     printw("Next level at: %d exp\n", requiredExp_);
+    printw("Press any key to continue...\n");
+    getch();
+    clear();
+
+    // Assign additional point into stats
+    levelStat();
+
+}
+
+void Player::levelStat()
+{   
+    // Disable echo
+    noecho();
+
+    int currentStat = 0;
+    
+    bool isStatAssigned = false;
+    
+    while(!isStatAssigned)
+    {
+        printw("!-- DEBUG CURRENT STAT %d\n", currentStat);
+        printw("What stat you would like to level up?\n");
+        printw(" Use arrow keys to navigate\n");
+        printw("Aim: %d", statAim_);
+        if(currentStat == 0)
+        {
+            printw(" = > %d", statAim_ + 1);
+        }
+        printw("\n");
+        printw("Charisma: %d", statCharisma_);
+        if(currentStat == 1)
+        {
+            printw(" = > %d", statCharisma_ + 1);
+        }
+        printw("\n");
+        printw("Vitality: %d", statVitality_);
+        if(currentStat == 2)
+        {
+            printw(" = > %d", statVitality_ + 1);
+        }
+        printw("\n");
+
+        int input = getch();
+        switch(input)
+        {
+            case KEY_LEFT:
+            printw("KEY LEFT PRESSED\n");
+                if(currentStat == 0)
+                {
+                    currentStat = 2;
+                    clear();
+                    break;
+                }
+                
+                currentStat--;
+                printw("!-- DEBUG CURRENT STAT CHANGE%d\n", currentStat);
+                clear();
+                break;
+            case KEY_RIGHT:
+            printw("KEY RIGHT PRESSED\n");
+                if(currentStat == 2)
+                {
+                    currentStat = 0;
+                    clear();
+                    break;
+                }
+
+                currentStat++;
+                clear();
+                printw("!-- DEBUG CURRENT STAT CHANGE%d\n", currentStat);
+                break;
+            case KEY_ENTER:
+            case '\n':
+                printw("Assigning stat to ");
+                switch (currentStat)
+                {
+                case 0:
+                    printw("aim.\n Newvalue: %d\n", statAim_ + 1);
+                    break;
+                
+                case 1:
+                    printw("charisma.\nNew value: %d\n", statCharisma_ + 1);                
+                    break;
+                
+                case 2:
+                    printw("vitality.\nNew value: %d\n", statVitality_ + 1);
+                    break;
+                }
+                isStatAssigned = true;
+                break;
+            default:
+                printw("NO VALID KEY PRESSED\n");
+                getch();
+                clear();
+        }
+    }
+
+    // Enable echo
+    echo();
+
+    if(currentStat == 0)
+    {
+        setStatAim(statAim_ + 1);
+    }
+    else if(currentStat == 1)
+    {
+        setStatCharisma(statCharisma_ + 1);
+    }
+    else
+    {
+        setStatVit(statVitality_ + 1);
+    }
+
 }
 
 void Player::addWeapon(Weapon* newWeapon)
