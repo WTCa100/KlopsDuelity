@@ -1,7 +1,7 @@
 #include "./NIO.hpp"
 
 #include <iostream>
-
+// Stream In
 namespace NI
 {
     // This will imitate std::getline
@@ -76,3 +76,10 @@ namespace NI
     }
 
 } // namespace NI
+
+// Stream out
+namespace NO
+{
+    // Handle mouse events using threads    
+
+} // namespace NO
