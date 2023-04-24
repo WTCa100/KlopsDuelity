@@ -13,7 +13,7 @@
 #include "../Entities/Weapons/Muskets/Springfield1835/springfield1835.hpp"
 #include "../Entities/Weapons/Muskets/Moukahla/moukahla.hpp"
 
-Player::Player(std::string name) : Shooter(true, name), money_(100), pOrigin_(new Origin), level_(1), exp_(0), requiredExp_(1000)
+Player::Player(std::string name) : Shooter(true, name), money_(100), pOrigin_(new Origin), level_(1), exp_(0), requiredExp_(1000), duelCount_(0), playerGlobalShotCount_(0)
 {
     // Make player choose starting weapon later / weapon will be determined on origin (preferable)
     getStatsFromOrigin();   
@@ -58,6 +58,34 @@ void Player::levelUp()
 
     // Assign additional point into stats
     levelStat();
+
+}
+
+void Player::showFullGameStats()
+{
+    printw("Name: %s\n", name_.c_str());
+    printw("General game statistics:\n");
+    printw("Duels played: %d\n", duelCount_);
+    printw("Duels won: %d\n", duelsWonCount_);
+    printw("Shots fired: %d\n", 0); // TODO
+    printw("Money %d\n", money_);
+    printw("Money won: %d\n", moneyWon_); // TODO
+
+    printw("Character stats:\n");
+    printw("Level: %d\n", level_);
+    printw("Current Exp: %d\n", exp_);
+    printw("Required Exp: %d\n", requiredExp_);
+    printw("Vitality: %d\n", statVitality_);
+    printw("Charisma: %d\n", statCharisma_);
+    printw("Aim: %d\n", statAim_);        
+
+    printw("Weapons owned: \n");
+    int iter = 0;
+    for(auto weapon : weaponsOwned_)
+    {
+        iter ++;
+        printw("%d. %s\n", iter, weapon->getWeaponName().c_str());
+    }
 
 }
 

@@ -7,7 +7,8 @@ enum SessionMainScreenOptions
 {
     kQuit      = -1,
     kGoToArena = 1,
-    kGoToShop  = 2
+    kGoToShop  = 2,
+    kGoToCabin = 3
 };
 
 namespace Menus

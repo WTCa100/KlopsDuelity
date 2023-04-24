@@ -2,7 +2,7 @@
 namespace Modifiers
 {
 
-    extern double duelReward(const double& enemyWeaponDmg, const double& enemyWeaponAccuracy, 
+    extern int duelReward(const double& enemyWeaponDmg, const double& enemyWeaponAccuracy, 
                       const double& distance, const int& playerCharisma,
                       const double& baseReward = 100);
 

@@ -22,13 +22,6 @@ int main()
     // For now on this will be left as comments 
     //scrollok(stdscr, TRUE);  
     //mousemask(ALL_MOUSE_EVENTS, NULL); // Enable mouse events
-   
-    // Test
-    for(int i = 0; i < 100; i++)
-    {
-        printw("TEST%d\n", i);
-    }
-    getch();
 
     // This is vim test
     printw("Hello world!\n");

@@ -15,9 +15,9 @@ class Duel
 {
 friend class entities::HEU;
 private:
-    double reward_;
+    uint32_t reward_;
     int expReward_;
-    int shotCount_;
+    int duelShotCount_;
     Player* player_;
     Shooter* oponent_;
     Shooter* winner_;

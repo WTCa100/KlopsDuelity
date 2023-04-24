@@ -46,14 +46,13 @@ namespace entities::HEUTypes
         printw("Shooter spawned\n"); 
     }
 
-    Shooter::Shooter(bool isPlayer, std::string name) : HEU(isPlayer, name), currentlyHeldWeapon_(nullptr)
+    Shooter::Shooter(bool isPlayer, std::string name) : HEU(isPlayer, name), currentlyHeldWeapon_(nullptr), duelsWonCount_(0)
     {
         assingDefaultParemters(*this);
         printw("Shooter spawned\n"); 
         if(isPlayer_)
         {
-            // Unless save was loaded
-            duelsWonCount_ = 0;
+            // DuelsWonCount set to 0 unless saved is loaded
             printw("Shooter with %d is a player\n", hId_);
             // TODO: Make player pick weapon his weapon
             // Note: Currently held weapon will always be the weapon that provides the greates ammount of power

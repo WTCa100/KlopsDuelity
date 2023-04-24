@@ -31,6 +31,7 @@ class Session
     public:
     entities::HEUTypes::Shooter* pickOponent();
     entities::HEUTypes::Shooter* generateOponent(oponentDifficulty difLvl);
+    void cabin();
     void core();
     void characterCreation();
     void shop();

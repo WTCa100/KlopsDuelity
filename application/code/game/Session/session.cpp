@@ -52,6 +52,30 @@ void Session::shop()
     delete shopOwner;
 }
 
+void Session::cabin()
+{
+    noecho();
+    if(mainCharacter_)
+    {
+        while(true)
+        {
+            mainCharacter_->showFullGameStats();            
+            printw("Press 'q' to exit\n");
+            if(getch() == 'q')
+            {
+                break;
+            }
+            else
+            {
+                clear();
+            }            
+        }
+    }
+
+    clear();
+    echo();
+}
+
 void Session::core()
 {
     characterCreation();
@@ -65,8 +89,11 @@ void Session::core()
         case SessionMainScreenOptions::kGoToArena:
             duel();
             break;
-        case SessionMainScreenOptions::kGoToShop :
+        case SessionMainScreenOptions::kGoToShop:
             shop();        
+            break;
+        case SessionMainScreenOptions::kGoToCabin:
+            cabin();
             break;
         case SessionMainScreenOptions::kQuit :
             gameOn = false;
@@ -182,7 +209,10 @@ entities::HEUTypes::Shooter* Session::pickOponent()
             printw("Oponent #%i\n", enemyId + 1);
             printw("Name: %s\n", listOfVilains[enemyId]->getEntityName().c_str());
             printw("Weapon: %s\n", listOfVilains[enemyId]->getCurrentlyHeldWeapon()->getWeaponName().c_str());
-            printw("Power: %d\n\n", listOfVilains[enemyId]->getPower());
+            printw("Power: %d\n", listOfVilains[enemyId]->getPower());
+            printw("(Vit: %d, Chr: %d, Aim: %d)\n\n",
+                    listOfVilains[enemyId]->getStatVit(), listOfVilains[enemyId]->getStatCharisma(),
+                    listOfVilains[enemyId]->getStatAim());
         }
         printw("Your option: ");
         InputCheck::helperInsertInputIntoContainer(choosenOponent);

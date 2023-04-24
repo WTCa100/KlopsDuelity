@@ -7,8 +7,9 @@
 
 Duel::Duel(Player* player, Shooter* oponent) : player_(player), oponent_(oponent), distance_(12)
 {
+    player_->setDuelCount(player_->getDuelCount() + 1);
     calculateReward();
-    printw("Stake is: %.2f$\n", reward_);
+    printw("Stake is: %d$\n", reward_);
     printw("Duel starts!\n");
     printw("%s VS %s\n", player_->getEntityName().c_str(), oponent_->getEntityName().c_str());
 }
@@ -17,7 +18,7 @@ void Duel::calculateReward()
 {
     // reward will be based on personal charisma and enemy stats
     // Minimal value to win
-    double rewardBase = 100;
+    int rewardBase = 100;
 
 //    double enemyModifer = oponent_->currentlyHeldWeapon_->getWeaponBaseDmg() + oponent_->currentlyHeldWeapon_->getWeaponBaseAccuracy();
 //    double distanceModifier = distance_ * 2;
@@ -57,7 +58,8 @@ Shooter* Duel::shootOut()
         round == 0 ? printw("First turn goes to %s\n", player_->name_.c_str()) : 
                      printw("The turn goes to %s", player_->name_.c_str());
         player_->fireWeapon(oponent_, distance_);
-        shotCount_++;
+        player_->addPlayerShotCount();
+        duelShotCount_++;
 
         printw("It's %s\'s turn\n", oponent_->name_.c_str());        
         oponent_->fireWeapon(player_, distance_);
@@ -136,6 +138,8 @@ void Duel::changeDistance()
     echo();
 }
 
+// TODO: When player faces enemy with greater health than him, he will always lose unless he kills his oponent
+// We will have to change that and check how many health each of the participants lost either in percentage or in plain numbers
 void Duel::announceWinner()
 {
     // This is due to be changed but for now whoever has the bigger hp wins.
@@ -158,6 +162,9 @@ void Duel::announceWinner()
     }
     else
     {
+        player_->duelsWonCount_ ++;
+        player_->setMoney(player_->getMoney() + reward_);
+        player_->setMoneyWon(player_->getMoneyWon() + reward_);
         hasPlayerWon = true;
         winner_ = player_;
         printw("%s has won!\n", player_->name_.c_str());
@@ -168,12 +175,12 @@ void Duel::announceWinner()
     }
 
     bool wasOneShot = false;
-    if(shotCount_ == 1 && oponent_->isDead_)
+    if(duelShotCount_ == 1 && oponent_->isDead_)
     {
         wasOneShot = true;
     }
 
-    expReward_ = Modifiers::calculateExpReward(oponent_->getPower(), shotCount_, distance_, hasPlayerWon, oponent_->isDead_, wasOneShot, wasTie);
+    expReward_ = Modifiers::calculateExpReward(oponent_->getPower(), duelShotCount_, distance_, hasPlayerWon, oponent_->isDead_, wasOneShot, wasTie);
 
 }
 

@@ -31,6 +31,12 @@ namespace Menus
                 actionChoosen_ = SessionMainScreenOptions::kGoToArena;
                 exitLoop = true;
                 break;
+            case KEY_LEFT:
+            case 'A':
+            case 'a':
+                actionChoosen_ = SessionMainScreenOptions::kGoToCabin;
+                exitLoop = true;
+                break;
             case 'q':
                 actionChoosen_ = SessionMainScreenOptions::kQuit;
                 exitLoop = true;
