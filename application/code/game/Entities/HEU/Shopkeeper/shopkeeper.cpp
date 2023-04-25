@@ -10,7 +10,7 @@ namespace entities::HEUTypes
 
     void Shopkeeper::presentItems()
     {
-        noecho();
+        //noecho();
         int itemId = 0;
         bool exitLoop = false;
         while(!exitLoop)
@@ -43,6 +43,7 @@ namespace entities::HEUTypes
                 exitLoop = true;
                 break;
             case KEY_ENTER:
+            case '\n':
                 if(tryToSell(itemId))
                 {
                     // If weapon was sold, push it back into players owned weapon
@@ -50,6 +51,8 @@ namespace entities::HEUTypes
                     // Change bool statment to true as the weapon was sold
                     weaponsForSale_[itemId].second = true;
                 }
+                printw("Press any key to continue...\n");
+                getch();
                 break;
             default:
                 printw("Please enter a valid option!\n");
@@ -61,7 +64,7 @@ namespace entities::HEUTypes
             refresh();
         }
 
-        echo();
+        //echo();
     }
 
     void Shopkeeper::showItem(int itemId)
@@ -120,7 +123,10 @@ namespace entities::HEUTypes
         // Delete evry pointer that was not sold (other pointers will be deleted later)
         for(auto weapon : weaponsForSale_)
         {
-            delete weapon.first;
+            if(!weapon.second)
+            {
+                delete weapon.first;
+            }
         }
     }
 } // namespace entities::HEUTypes
