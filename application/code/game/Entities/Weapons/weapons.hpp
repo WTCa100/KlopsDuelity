@@ -18,7 +18,7 @@ namespace entities
     public:
         Weapon();
         Weapon(std::string wName);
-        virtual void present() {};
+        void presentStats(bool isInShoop = false);
         virtual bool shoot(const double distance);
         // Aim - raises accuracy but lowers reward (both honor and money)
         virtual ~Weapon();

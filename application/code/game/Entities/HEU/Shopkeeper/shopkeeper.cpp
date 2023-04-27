@@ -71,9 +71,7 @@ namespace entities::HEUTypes
     {
         // Show it visually 
         Weapon* selectedWeapon = weaponsForSale_[itemId].first;
-        printw("Weapon: %s\n", selectedWeapon->getWeaponName().c_str());
-        printw("Base Dmg: %.2f\n", selectedWeapon->getWeaponBaseDmg());
-        printw("Base Accuracy: %.2f\n", selectedWeapon->getWeaponBaseAccuracy());
+        selectedWeapon->presentStats();
     }
 
     bool Shopkeeper::tryToSell(int itemId)

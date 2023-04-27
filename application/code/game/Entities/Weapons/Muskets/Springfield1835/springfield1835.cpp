@@ -12,11 +12,6 @@ namespace entities::weapons::muskets
         printw("Springfield model 1835 created\n");
     }
     
-    void Springfield1835::present()
-    {
-        printw("%s", name_.c_str());
-    }
-    
     Springfield1835::~Springfield1835()
     {
         printw("Springfield model 1835 destroyed\n");

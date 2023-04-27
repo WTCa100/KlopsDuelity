@@ -12,12 +12,7 @@ namespace entities::weapons::muskets
         baseAccuracy_ = 0.23;
         printw("Moukahla created\n");
     }
-
-    void Moukahla::present()
-    {
-        printw("%s", name_.c_str());
-    }
-
+    
     Moukahla::~Moukahla()
     {
         printw("Moukahla destroyed\n");

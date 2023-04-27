@@ -10,7 +10,6 @@ namespace entities::weapons::muskets
     {
         public:
         Moukahla();
-        void present() override;
         ~Moukahla();
     };
 }

@@ -20,6 +20,19 @@ namespace entities
         wIdGlobal_++; 
     }
 
+    void Weapon::presentStats(bool isInShoop)
+    {
+        printw("Name: %s\n", name_.c_str());
+        printw("Stast:\n");
+        printw("Accuracy: %.2f\n", baseAccuracy_);
+        printw("Damage: %d\n", baseDmg_);
+
+        if(isInShoop)
+        {
+            printw("Pirce: %d\n", basePrice_);
+        }
+    }
+
     bool Weapon::shoot(/*List modifier*/ const double distance)
     {
         printw("**-- POW --**\n");

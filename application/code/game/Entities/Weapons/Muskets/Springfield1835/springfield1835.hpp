@@ -11,7 +11,6 @@ namespace entities::weapons::muskets
     {   
         public:
         Springfield1835();
-        void present() override;
         ~Springfield1835();
     };  
     

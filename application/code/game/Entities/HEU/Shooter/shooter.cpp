@@ -151,7 +151,7 @@ namespace entities::HEUTypes
         }
 
         printw("%s said \"I will be using ", name_.c_str());
-        currentlyHeldWeapon_->present();
+        currentlyHeldWeapon_->presentStats();
         printw(" for the duel!\"\n");
     }
     

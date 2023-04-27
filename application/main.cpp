@@ -6,6 +6,9 @@
 #include <ncurses.h>
 #include "./code/utilities/IOStream/NIO.hpp"
 
+
+#include "./code/game/Display/Graphical/Arena/Arena.hpp"
+
 int main()
 {
     // Initialize necessery functionality
@@ -23,9 +26,13 @@ int main()
     //scrollok(stdscr, TRUE);  
     //mousemask(ALL_MOUSE_EVENTS, NULL); // Enable mouse events
 
-    // This is vim test
-    printw("Hello world!\n");
-    
+    //Graphics::Arena* a1 = new Graphics::Arena;
+    //a1->makeArena(10);
+    //getch();
+    //delete a1;
+    //endwin();
+    //exit(0);
+
     Application* gameApp = Application::getInstance();
     // Check files
     // Start app

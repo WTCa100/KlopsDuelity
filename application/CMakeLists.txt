@@ -15,6 +15,7 @@ target_link_libraries(${PROJECT_NAME}
     player
     Display
     Town
+    Arena
     Menu
     SessionMainScreen    
     HEU

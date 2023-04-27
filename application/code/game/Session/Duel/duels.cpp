@@ -4,6 +4,8 @@
 // Get modifiers
 #include "../../Modifiers/Modifiers.hpp"
 
+#include "../../Display/Graphical/Arena/Arena.hpp"
+
 
 Duel::Duel(Player* player, Shooter* oponent) : player_(player), oponent_(oponent), distance_(12)
 {
@@ -80,28 +82,41 @@ void Duel::changeDistance()
 
     int input = 0;
 
+    Graphics::Arena* fightArena = new Graphics::Arena;
+    WINDOW* arenaBox = newwin(10, 150, 0, 0);
+    wrefresh(arenaBox);
     while(true)
     {
+        move(13, 0);
+        refresh();
         calculateReward();
-        printw("You are %.2f meters away from your oponent\n", distance_);
+        fightArena->makeArena(distance_, arenaBox);
         printw("Debug: Dmg w/ modifier %.2f\n", player_->currentlyHeldWeapon_->getWeaponBaseDmg()/distance_);
-        printw("Debug: reward_ := %.2f\n", reward_);
+        printw("Debug: reward_ := %d\n", reward_);
         printw("Debug: Acc w/ modifier %.2f\n", (player_->currentlyHeldWeapon_->getWeaponBaseAccuracy() * 10) * (100 / distance_) + static_cast<double>(player_->statAim_ * 10) / 100);
         printw("Debug: Player vitality %d\n", player_->statVitality_);
         printw("Debug: Your hp: %.2f - Oponent hp: %.2f\n", player_->health_, oponent_->health_);
         // Show weapon acc and dmg 
         printw("Do you want to get closer or further?\n");
-        printw("<-/'a' further | closer ->/'d'\n");                        
+        printw("<-/'a' closer | further ->/'d'\n");                        
         bool exitLoop = false;
         input = getch();
+        //clear window
+        wclear(arenaBox);
         switch(input)
         {
-            case KEY_LEFT:
+            case KEY_RIGHT:
             case 'A':
             case 'a':
+                if(distance_ == 125)
+                {
+                    printw("Distance cannot be greater than 125!\n");
+                    getch();
+                    break;
+                }     
                 distance_++;
                 break;
-            case KEY_RIGHT:
+            case KEY_LEFT:
             case 'D':
             case 'd':
                 if(distance_ == 1)
@@ -109,7 +124,7 @@ void Duel::changeDistance()
                     printw("Distance cannot be lower than 1!\n");
                     getch();
                     break;
-                }            
+                }        
                 distance_--;
                 break;
             case '\n':
@@ -136,6 +151,8 @@ void Duel::changeDistance()
     }
     clear();
     echo();
+    delete fightArena;
+    delwin(arenaBox);
 }
 
 // TODO: When player faces enemy with greater health than him, he will always lose unless he kills his oponent
