@@ -45,12 +45,15 @@ void Application::startApp()
     else // Close app
     {
         printw("Application closing\n");
-        refresh();        
+        refresh();
+        delete mainMenu;                
         return;
     }
 
-    delete mainMenu;
-    // Create session
+    if(mainMenu)
+    {
+        delete mainMenu;
+    }
 }
 
 Application::~Application()

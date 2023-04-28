@@ -7,7 +7,7 @@
 #include "../../Display/Graphical/Arena/Arena.hpp"
 
 
-Duel::Duel(Player* player, Shooter* oponent) : player_(player), oponent_(oponent), distance_(12)
+Duel::Duel(Player* player, Shooter* oponent) : player_(player), oponent_(oponent), distance_(12), duelShotCount_(0)
 {
     player_->setDuelCount(player_->getDuelCount() + 1);
     calculateReward();
@@ -69,7 +69,8 @@ Shooter* Duel::shootOut()
         getch();
         round++;
     }
-
+    printw("SEGFAULT DEBUG : ANNOUNCE WINNER\n");
+    getch();
     announceWinner();
     return winner_;
 }
@@ -162,9 +163,13 @@ void Duel::announceWinner()
     // This is due to be changed but for now whoever has the bigger hp wins.
     bool hasPlayerWon = false;
     bool wasTie = false;
+    Graphics::Arena* winScreen = new Graphics::Arena;
+    printw("SEGFAULT DEBUG : ANNOUNCE WINNER: CHECK PLAYER HEALTH\n");
+    getch();
     if(player_->health_ < oponent_->health_)
     {
         winner_ = oponent_;
+        winScreen->winScreen(false);
         printw("%s has won!\n", oponent_->name_.c_str());
         if(player_->isDead_)
         {
@@ -179,6 +184,7 @@ void Duel::announceWinner()
     }
     else
     {
+        winScreen->winScreen(true);
         player_->duelsWonCount_ ++;
         player_->setMoney(player_->getMoney() + reward_);
         player_->setMoneyWon(player_->getMoneyWon() + reward_);

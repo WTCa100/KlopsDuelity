@@ -26,13 +26,6 @@ int main()
     //scrollok(stdscr, TRUE);  
     //mousemask(ALL_MOUSE_EVENTS, NULL); // Enable mouse events
 
-    //Graphics::Arena* a1 = new Graphics::Arena;
-    //a1->makeArena(10);
-    //getch();
-    //delete a1;
-    //endwin();
-    //exit(0);
-
     Application* gameApp = Application::getInstance();
     // Check files
     // Start app
