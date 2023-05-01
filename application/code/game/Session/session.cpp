@@ -5,7 +5,7 @@
 // Get ncruses
 #include <ncurses.h>
 #include "../../utilities/IOStream/NIO.hpp"
-// Input validation
+// Toolbox
 #include "../../utilities/Toolbox/InputCheck/InputCheck.hpp"
 // Entities
 #include "../Entities/HEU/Shopkeeper/shopkeeper.hpp"
@@ -14,8 +14,10 @@
 #include "../Entities/Weapons/Muskets/Moukahla/moukahla.hpp"
 #include "../Entities/Weapons/Muskets/Springfield1835/springfield1835.hpp"
 
-Session::Session() : mainCharacter_(nullptr), fighting_(nullptr), heuCount_()
+
+Session::Session(FManager* fMgr ) : mainCharacter_(nullptr), fighting_(nullptr), heuCount_(), fMgr_(fMgr)
 {
+    save_ = new gameSave(fMgr_);
     printw("Session starts\n");
 }
 
@@ -30,7 +32,7 @@ Session::~Session()
         printw("Teardown entity\n");
         delete entity;
     }
-
+    delete save_;
     printw("Session ends\n");
 }
 

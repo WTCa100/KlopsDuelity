@@ -38,7 +38,7 @@ void Application::startApp()
     // If statements for now - change to switch later
     if(mainMenu->getActionChoosen() == MenuOptions::kStartGame || mainMenu->getActionChoosen() == MenuOptions::kNone)
     {
-        Session* gameSession = new Session;
+        Session* gameSession = new Session(fMgr_);
         gameSession->core();
         delete gameSession;
     }
@@ -59,6 +59,7 @@ void Application::startApp()
 Application::~Application()
 {
     printw("Application :dtor:\n");
+    delete fMgr_;
 }
 
 Application* Application::instance_ = nullptr;

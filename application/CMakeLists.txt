@@ -7,8 +7,10 @@ include_directories(./code)
 target_link_libraries(${PROJECT_NAME}
     Application
     NIO
+    Fmanager
     InputCheck    
     Session
+    gameSave
     modifiers
     Duels
     OriginStories    

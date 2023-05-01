@@ -6,8 +6,7 @@
 #include <ncurses.h>
 #include "./code/utilities/IOStream/NIO.hpp"
 
-
-#include "./code/game/Display/Graphical/Arena/Arena.hpp"
+#include "./code/utilities/Toolbox/FileManager/Fmanager.hpp"
 
 int main()
 {
