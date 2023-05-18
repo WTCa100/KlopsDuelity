@@ -7,9 +7,11 @@
 #include "../../Display/Graphical/Arena/Arena.hpp"
 
 
-Duel::Duel(Player* player, Shooter* oponent) : player_(player), oponent_(oponent), distance_(12), duelShotCount_(0)
+Duel::Duel(Player* player, Shooter* oponent) : player_(player), oponent_(oponent), distance_(12), duelShotCount_(0), playerDmgDealt_(0), enemyDmgDealt_(0)
 {
     player_->setDuelCount(player_->getDuelCount() + 1);
+    playerStartingHp_ = player_->getHealth();
+    enemyStartingHp_  = oponent_->health_;
     calculateReward();
     printw("Stake is: %d$\n", reward_);
     printw("Duel starts!\n");
@@ -68,8 +70,8 @@ Shooter* Duel::shootOut()
         getch();
         round++;
     }
-    printw("SEGFAULT DEBUG : ANNOUNCE WINNER\n");
     getch();
+    clear();
     announceWinner();
     return winner_;
 }
@@ -86,6 +88,7 @@ void Duel::changeDistance()
     wrefresh(arenaBox);
     while(true)
     {
+        // Move cursor outside of the box (just under box)
         move(13, 0);
         refresh();
         calculateReward();
@@ -161,9 +164,15 @@ void Duel::announceWinner()
     bool hasPlayerWon = false;
     bool wasTie = false;
     Graphics::Arena* winScreen = new Graphics::Arena;
-    printw("SEGFAULT DEBUG : ANNOUNCE WINNER: CHECK PLAYER HEALTH\n");
+
+    // Set condition values
+    playerDmgDealt_ = enemyStartingHp_ - oponent_->health_;
+    enemyDmgDealt_ = playerStartingHp_ - player_->getHealth();
+    printw("Player recieved %.2f dmg in this game\n", enemyDmgDealt_);
+    printw("Oponent recieved %.2f dmg in this game\n", playerDmgDealt_);
     getch();
-    if(player_->health_ < oponent_->health_)
+
+    if(playerDmgDealt_ < enemyDmgDealt_ || player_->isDead_)
     {
         winner_ = oponent_;
         winScreen->winScreen(false);
@@ -173,7 +182,7 @@ void Duel::announceWinner()
             printw("You literally died\n");
         }
     }
-    else if(player_->health_ == oponent_->health_)
+    else if(playerDmgDealt_ == enemyDmgDealt_)
     {
         wasTie = true;
         winner_ = nullptr;
@@ -212,4 +221,6 @@ Duel::~Duel()
         player_->giveExp(expReward_);
         player_->setHealth(player_->getMaxHealth());
     }
+    getch();
+    clear();
 }

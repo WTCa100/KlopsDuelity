@@ -132,9 +132,8 @@ namespace entities::HEUTypes
             getch();
         }
 
-        printw("%s said \"I will be using ", name_.c_str());
+        printw("%s said \"I will be using %s for the duel", name_.c_str(), currentlyHeldWeapon_->getWeaponName());
         currentlyHeldWeapon_->presentStats();
-        printw(" for the duel!\"\n");
     }
     
     void Shooter::setCurrentlyHeldWeapon(entities::Weapon* newWeapon)

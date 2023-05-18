@@ -39,7 +39,7 @@ namespace entities::HEUTypes
         public:
         void assingDefaultParemters(Shooter& modifyShooter);
         void evaluatePower();
-        void pickWeapon();
+        virtual void pickWeapon();
         void fireWeapon(Shooter* target, const double distance);
         Shooter();
         Shooter(bool isPlayer, std::string name);

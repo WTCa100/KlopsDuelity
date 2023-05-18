@@ -52,6 +52,4 @@ void Application::startApp()
 
 Application::~Application() {}
 
-Application::~Application() {}
-
 Application* Application::instance_ = nullptr;

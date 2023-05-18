@@ -21,7 +21,7 @@ namespace entities
     void Weapon::presentStats(bool isInShoop)
     {
         printw("Name: %s\n", name_.c_str());
-        printw("Stast:\n");
+        printw("Weapon Stats:\n");
         printw("Accuracy: %.2f\n", baseAccuracy_);
         printw("Damage: %d\n", baseDmg_);
 
@@ -38,8 +38,5 @@ namespace entities
         return diceRoll <= Modifiers::calculateAccuracy(baseAccuracy_, distance);
     }    
     
-    Weapon::~Weapon()
-    {
-        printw("Deleting weapon with ID %d\n", wId_);
-    }    
+    Weapon::~Weapon() {}
 } // namespace entities

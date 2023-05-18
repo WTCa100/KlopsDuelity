@@ -18,6 +18,12 @@ private:
     uint32_t reward_;
     int expReward_;
     int duelShotCount_;
+
+    double playerStartingHp_;
+    double enemyStartingHp_;
+    double enemyDmgDealt_;
+    double playerDmgDealt_;
+
     Player* player_;
     Shooter* oponent_;
     Shooter* winner_;
