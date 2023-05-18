@@ -54,6 +54,7 @@ namespace entities::HEUTypes
         int getStatCharisma() const { return statCharisma_; }
         int getPower() const { return power_; }
         entities::Weapon* getCurrentlyHeldWeapon() const { return currentlyHeldWeapon_; }
+        bool getIsDeadStatus () const { return isDead_; }
 
         // Setters
         void setHealth(const double& newHealth) {health_ = newHealth;}
@@ -63,6 +64,7 @@ namespace entities::HEUTypes
         void setStatAim(const int& newStatAim);
         void setStatVit(const int& newStatVit);
         void setStatCharisma(const int& newStatCharisma);
+        void setIsDeadStatus(const bool& isDead) { isDead_ = isDead; }
 
     };
     

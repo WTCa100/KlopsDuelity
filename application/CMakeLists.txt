@@ -19,6 +19,7 @@ target_link_libraries(${PROJECT_NAME}
     Menu
     SessionMainScreen    
     HEU
+    Names
     shooter
     shopkeeper
     weapon

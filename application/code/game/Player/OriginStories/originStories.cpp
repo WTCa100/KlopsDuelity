@@ -12,7 +12,6 @@
 
 Origin::Origin() : startingOrigin_(choosePlayerOrigin())
 {
-    printw("Creation of player story\n");
     initStatAssign();
 }
 
@@ -21,19 +20,19 @@ void Origin::initStatAssign()
 
     switch (startingOrigin_)
     {
-    case PlayerOrigin::kBasicAim:
+    case PlayerOrigin::kClassSoldier:
         baseOriginStatAim_ = 3;
         baseOriginStatCharisma_ = 1;
         baseOriginStatVitality_ = 1;
         baseOriginWeapon_ = new entities::weapons::muskets::Moukahla();
         break;
-    case PlayerOrigin::kBasicCharisma:
+    case PlayerOrigin::kClassWealthy:
         baseOriginStatAim_ = 1;
         baseOriginStatCharisma_ = 3;
         baseOriginStatVitality_ = 1;
         baseOriginWeapon_ = new entities::weapons::muskets::Moukahla();
         break;
-    case PlayerOrigin::kBasicVitality:
+    case PlayerOrigin::kClassButcher:
         baseOriginStatAim_ = 1;
         baseOriginStatCharisma_ = 1;
         baseOriginStatVitality_ = 3;
@@ -57,9 +56,9 @@ PlayerOrigin Origin::choosePlayerOrigin()
     while(true)
     {
         printw("What is thy story!\n");
-        printw("1 I was kBasicAim as a child!\n");
-        printw("2 I was kBasicVitality as a child!\n");
-        printw("3 I was kBasicCharisma as a child!\n");
+        printw("1 I was born into a family of warriors, where every member was and forever will be a soldier!\n");
+        printw("2 We were a poor family, my father was a butcher and I tend to help him here and there.\n");
+        printw("3 My family is known in the entire continent, we are rich and powerful!\n");
         InputCheck::helperInsertInputIntoContainer(userInput);
         if(InputCheck::isStringNumberInRange(userInput, 3))
         {
@@ -73,5 +72,6 @@ PlayerOrigin Origin::choosePlayerOrigin()
         }
         clear();
     }
+    clear();
     return static_cast<PlayerOrigin>(std::stoi(userInput));
 }

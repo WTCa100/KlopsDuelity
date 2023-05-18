@@ -9,6 +9,7 @@
 #include "../../utilities/Toolbox/InputCheck/InputCheck.hpp"
 // Entities
 #include "../Entities/HEU/Shopkeeper/shopkeeper.hpp"
+#include "../Entities/HEU/Shooter/Names/Names.hpp"
 // Weapons
 #include "../Entities/Weapons/weapons.hpp"
 #include "../Entities/Weapons/Muskets/Moukahla/moukahla.hpp"
@@ -16,7 +17,7 @@
 
 Session::Session() : mainCharacter_(nullptr), fighting_(nullptr), heuCount_()
 {
-    printw("Session starts\n");
+    clear();
 }
 
 Session::~Session()
@@ -39,8 +40,6 @@ void Session::characterCreation()
     std::string playerName;
     printw("Enter your name!\n");
     NI::getline(playerName);
-    printw("%s name - %d length\n", playerName.c_str(), playerName.length());
-    getch();
     mainCharacter_ = new Player(playerName);
     heuCount_.push_back(mainCharacter_);
 }
@@ -99,6 +98,14 @@ void Session::core()
             gameOn = false;
             break;
         }
+
+        // Check if player died and display game over
+        if(mainCharacter_->getIsDeadStatus())
+        {
+            printw("Game over!\n");
+            getch();
+        }
+
     }
 
     delete mainSessionDisplay;
@@ -131,11 +138,14 @@ entities::HEUTypes::Shooter* Session::generateOponent(oponentDifficulty difLvl)
     std::vector<int> refStats{mainCharacter_->getStatAim(), mainCharacter_->getStatCharisma(), mainCharacter_->getStatVit()};
     int refMaxStat = *std::max_element(refStats.begin(), refStats.end());
 
+    std::string generatedName = entities::Names::tableOfNames[rand() % entities::Names::tableOfNames.size()] + " " + entities::Names::tableOfSurnames[rand() % entities::Names::tableOfSurnames.size()];
+
+
     switch (difLvl)
     {
     case oponentDifficulty::kEasy:
         // ATM name is changed for possible debug purposes
-        returnOponent->setEntityName("ShooterEasy");
+        returnOponent->setEntityName(generatedName);
         // Assign stats depending on player stats
         // Easy shall generate power of 65 to 80% of Players
         do
@@ -149,7 +159,7 @@ entities::HEUTypes::Shooter* Session::generateOponent(oponentDifficulty difLvl)
         
         break;
     case oponentDifficulty::kMediocore:
-        returnOponent->setEntityName("ShooterMediocore");
+        returnOponent->setEntityName(generatedName);
         // Assign stats depending on player stats
         // Mediocore shall generate power of 80 to 120% of Players
         do
@@ -163,7 +173,7 @@ entities::HEUTypes::Shooter* Session::generateOponent(oponentDifficulty difLvl)
          
         break;
     case oponentDifficulty::kHard:
-        returnOponent->setEntityName("ShooterHard");
+        returnOponent->setEntityName(generatedName);
         // Assign stats depending on player stats
         // Mediocore shall generate power of 120 to 250% of Players        
         do
@@ -244,14 +254,10 @@ entities::HEUTypes::Shooter* Session::pickOponent()
 
 void Session::duel()
 {
-    printw("!-- Debug prepare variables for duel\n");
     entities::HEUTypes::Shooter* enemy = pickOponent();
     heuCount_.push_back(enemy);
     fighting_ = new Duel(mainCharacter_, enemy);
     fighting_->prepareForFight();
     fighting_->shootOut();
     delete fighting_;
-    // After game show health of the oponents
-    printw("!-- Debug player character health: %.2f\n", mainCharacter_->getHealth());
-    printw("!-- Debug Enemy character health: %.2f\n", enemy->getHealth());
 }

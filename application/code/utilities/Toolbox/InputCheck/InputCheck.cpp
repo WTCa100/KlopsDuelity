@@ -10,7 +10,6 @@
 
 bool InputCheck::isStringNumber(const std::string& input)
 {
-    printw("Checking if string is a number...\n");
     return !input.empty() && input.find_first_not_of("0123456789") == std::string::npos;
 }
 

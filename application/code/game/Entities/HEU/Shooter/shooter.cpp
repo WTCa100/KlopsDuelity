@@ -43,25 +43,11 @@ namespace entities::HEUTypes
     Shooter::Shooter() : currentlyHeldWeapon_(nullptr)
     {
         assingDefaultParemters(*this);
-        printw("Shooter spawned\n"); 
     }
 
     Shooter::Shooter(bool isPlayer, std::string name) : HEU(isPlayer, name), currentlyHeldWeapon_(nullptr), duelsWonCount_(0)
     {
         assingDefaultParemters(*this);
-        printw("Shooter spawned\n"); 
-        if(isPlayer_)
-        {
-            // DuelsWonCount set to 0 unless saved is loaded
-            printw("Shooter with %d is a player\n", hId_);
-            // TODO: Make player pick weapon his weapon
-            // Note: Currently held weapon will always be the weapon that provides the greates ammount of power
-            // Unless it's a duel situation 
-        }
-        else
-        {
-            printw("Shooter with %d is not a player\n", hId_);
-        }
     }
 
 
@@ -89,8 +75,6 @@ namespace entities::HEUTypes
         {
             power_ = Modifiers::calculateEntityPower(statAim_, statVitality_, statCharisma_);
         }
-
-        printw("!DEBUG --- New Power %d\n", power_);
     }
 
     void Shooter::setStatVit(const int& newStatVit) 
@@ -119,14 +103,12 @@ namespace entities::HEUTypes
         printw("%s fires his %s\n", name_.c_str(), currentlyHeldWeapon_->getWeaponName().c_str());
         printw("He is aiming at: %s\n", target->name_.c_str());
         bool hasHit = currentlyHeldWeapon_->shoot(distance);
-        printw("!DEBUG --- %s has ", name_.c_str());
         if(hasHit)
         {
             double hitPoints = this->currentlyHeldWeapon_->getWeaponBaseDmg() / distance;
-            printw("Hits his oponent\n");
+            printw("Hits his oponent, dealing %.2f dmg\n", hitPoints);
             // Dummy value for now
             target->health_ = target->health_ - hitPoints;
-            printw("!DEBUG --- NEW HEALTH %.2f\n", target->getHealth());
             if(target->health_ <= 0)
             {
                 target->isConcious_ = false;
@@ -163,7 +145,6 @@ namespace entities::HEUTypes
 
     Shooter::~Shooter()
     {
-        printw("Shooter %d ( %s ) despawned", hId_, name_.c_str());
         if(currentlyHeldWeapon_)
         {
             delete currentlyHeldWeapon_;

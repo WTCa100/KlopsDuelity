@@ -12,10 +12,7 @@
 #include "../../Entities/HEU/heu.hpp"
 #include "../../Entities/HEU/Shooter/shooter.hpp"
 
-Menu::Menu() : actionChoosen_(MenuOptions::kNone)
-{
-    printw("Menu :ctor:\n");
-}
+Menu::Menu() : actionChoosen_(MenuOptions::kNone) {}
 
 void Menu::mainDisplay()
 {
@@ -50,7 +47,4 @@ bool Menu::getUserInput(std::string& userInput)
     return InputCheck::isStringNumberInRange(userInput, 2);
 }
 
-Menu::~Menu()
-{
-    printw("Menu :dtor:\n");
-}
+Menu::~Menu() {}

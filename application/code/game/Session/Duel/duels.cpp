@@ -1,4 +1,4 @@
-#include <ncurses.h> // for getch()
+#include <ncurses.h>
 
 #include "./duels.hpp"
 // Get modifiers
@@ -50,18 +50,17 @@ void Duel::prepareForFight()
 Shooter* Duel::shootOut()
 {
     int round = 0;
-    while((player_->isConcious_ && oponent_->isConcious_) /*|| surrender was choosen*/ && round < 2)
+    while((player_->isConcious_ && oponent_->isConcious_) /*|| surrender was choosen*/ && round < 20)
     {
         printw("Round %d\n", round + 1);
-        changeDistance();
-        printw("! --- DEBUG: Distance: %.2f\n", distance_);        
-        printw("!--- Debug: Player health %d\n", player_->health_);
-        printw("!--- Debug: Enemy health %d\n", oponent_->health_);
         round == 0 ? printw("First turn goes to %s\n", player_->name_.c_str()) : 
-                     printw("The turn goes to %s", player_->name_.c_str());
+                     printw("The turn goes to %s\n", player_->name_.c_str());
+        changeDistance();
         player_->fireWeapon(oponent_, distance_);
         player_->addPlayerShotCount();
         duelShotCount_++;
+        printw("Press any key to continue...\n");
+        getch();
 
         printw("It's %s\'s turn\n", oponent_->name_.c_str());        
         oponent_->fireWeapon(player_, distance_);
@@ -76,7 +75,6 @@ Shooter* Duel::shootOut()
 
 void Duel::changeDistance()
 {
-    printw("!DEBUG --- Adjusting of distance\n");
     keypad(stdscr, TRUE); // Enable keypad 
     noecho(); // Disable input echoing
 
@@ -91,11 +89,10 @@ void Duel::changeDistance()
         refresh();
         calculateReward();
         fightArena->makeArena(distance_, arenaBox);
-        printw("Debug: Dmg w/ modifier %.2f\n", player_->currentlyHeldWeapon_->getWeaponBaseDmg()/distance_);
-        printw("Debug: reward_ := %d\n", reward_);
-        printw("Debug: Acc w/ modifier %.2f\n", (player_->currentlyHeldWeapon_->getWeaponBaseAccuracy() * 10) * (100 / distance_) + static_cast<double>(player_->statAim_ * 10) / 100);
-        printw("Debug: Player vitality %d\n", player_->statVitality_);
-        printw("Debug: Your hp: %.2f - Oponent hp: %.2f\n", player_->health_, oponent_->health_);
+        printw("Dmg: %.2f\n", player_->currentlyHeldWeapon_->getWeaponBaseDmg()/distance_);
+        printw("Stake: := %d\n", reward_);
+        printw("Chance of hitting %.2f\n", (player_->currentlyHeldWeapon_->getWeaponBaseAccuracy() * 10) * (100 / distance_) + static_cast<double>(player_->statAim_ * 10) / 100);
+        printw("Your hp: %.2f - Oponent hp: %.2f\n", player_->health_, oponent_->health_);
         // Show weapon acc and dmg 
         printw("Do you want to get closer or further?\n");
         printw("<-/'a' closer | further ->/'d'\n");                        

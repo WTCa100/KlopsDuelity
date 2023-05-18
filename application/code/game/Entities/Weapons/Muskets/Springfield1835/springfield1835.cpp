@@ -9,13 +9,9 @@ namespace entities::weapons::muskets
         basePrice_ = 120;
         baseDmg_ = 60;
         baseAccuracy_ = 0.25;
-        printw("Springfield model 1835 created\n");
     }
     
-    Springfield1835::~Springfield1835()
-    {
-        printw("Springfield model 1835 destroyed\n");
-    }    
+    Springfield1835::~Springfield1835() {}    
 } // namespace entities::weapons::muskets
 
 

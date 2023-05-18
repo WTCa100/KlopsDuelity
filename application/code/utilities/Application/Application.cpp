@@ -6,11 +6,7 @@
 
 #include <ncurses.h>
 
-Application::Application()
-{
-    printw("Application :ctor:\n");
-    refresh();
-}
+Application::Application() {}
 
 Application* Application::getInstance()
 {
@@ -53,9 +49,6 @@ void Application::startApp()
     // Create session
 }
 
-Application::~Application()
-{
-    printw("Application :dtor:\n");
-}
+Application::~Application() {}
 
 Application* Application::instance_ = nullptr;

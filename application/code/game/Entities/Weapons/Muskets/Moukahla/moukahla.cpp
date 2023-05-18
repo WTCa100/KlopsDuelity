@@ -10,12 +10,8 @@ namespace entities::weapons::muskets
         basePrice_ = 100;
         baseDmg_ = 35;
         baseAccuracy_ = 0.23;
-        printw("Moukahla created\n");
     }
     
-    Moukahla::~Moukahla()
-    {
-        printw("Moukahla destroyed\n");
-    }
+    Moukahla::~Moukahla(){}
     
 } // namespace entities::weapons::muskets

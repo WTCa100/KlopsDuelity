@@ -6,9 +6,9 @@
 enum class PlayerOrigin
 {
     // Dummies - change later
-    kBasicAim = 1,
-    kBasicVitality = 2,
-    kBasicCharisma = 3
+    kClassSoldier  = 1,
+    kClassButcher  = 2,
+    kClassWealthy  = 3
 };
 
 class Origin

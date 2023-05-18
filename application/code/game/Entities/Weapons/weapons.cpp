@@ -8,14 +8,12 @@ namespace entities
     
     Weapon::Weapon()
     {
-        printw("Creating weapon with ID: %d\n", wIdGlobal_);
         wId_ = wIdGlobal_;
         wIdGlobal_++;
     }
 
     Weapon::Weapon(std::string wName) : name_(wName)
     {
-        printw("Creating weapon with ID: %d. Name assigned: %s\n", wIdGlobal_, name_.c_str());
         wId_ = wIdGlobal_;
         wIdGlobal_++; 
     }

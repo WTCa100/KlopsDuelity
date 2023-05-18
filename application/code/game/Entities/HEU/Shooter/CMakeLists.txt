@@ -1,3 +1,5 @@
+add_subdirectory(./Names)
+
 # Add source and header file into library
 add_library(shooter STATIC shooter.cpp shooter.hpp)
 
