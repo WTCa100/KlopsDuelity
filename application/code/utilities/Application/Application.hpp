@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../Toolbox/FileManager/Fmanager.hpp"
+
 class Application
 {
 // TODO:
@@ -11,6 +13,7 @@ Note: this time config should be stored in different file with specified extensi
 */
 
 private:
+    FManager* fMgr_;
     static Application* instance_;
     Application();
     void startGameSession();

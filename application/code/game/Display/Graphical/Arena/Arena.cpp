@@ -33,6 +33,17 @@ namespace Graphics
         mainDisplay();
     }
 
+    void Arena::winScreen(const bool& hasPlayerWon)
+    {
+        hasPlayerWon ? printw(" P \n") : printw(" E \n");
+        printw("| |\n");
+        printw("\\O/\n");
+        printw(" | \n");
+        printw(" | \n");
+        printw("/ \\\n");
+        printw("| |\n");
+    }
+
     void Arena::mainDisplay()
     {
         printw("Distance: %d\n", drawDistance_);

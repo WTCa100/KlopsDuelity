@@ -13,6 +13,7 @@ namespace Graphics
     public:
         void makeArena(const int& drawDistance, WINDOW* arenaBox);
         void mainDisplay() override;
+        void winScreen(const bool& hasPlayerWon);
         Arena() = default;
         ~Arena() = default;      
     };

@@ -10,7 +10,7 @@ namespace Menus
     {
         Display* townDisp = new Graphics::Town();
         // Get input
-        bool exitLoop;
+        bool exitLoop = false;
         while(!exitLoop)
         {
             townDisp->mainDisplay();
