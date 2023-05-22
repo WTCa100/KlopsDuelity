@@ -24,14 +24,33 @@ void Duel::calculateReward()
     // Minimal value to win
     int rewardBase = 100;
 
-//    double enemyModifer = oponent_->currentlyHeldWeapon_->getWeaponBaseDmg() + oponent_->currentlyHeldWeapon_->getWeaponBaseAccuracy();
-//    double distanceModifier = distance_ * 2;
-//    double charismaModifier = 1 + (static_cast<double>(player_->statCharisma_) / 10);
-//    reward_ = (rewardBase + enemyModifer + distanceModifier) * charismaModifier;
     reward_ = Modifiers::duelReward(oponent_->currentlyHeldWeapon_->getWeaponBaseDmg(),
                                     oponent_->currentlyHeldWeapon_->getWeaponBaseAccuracy(),
                                     distance_, player_->statCharisma_, rewardBase);
 
+}
+
+bool Duel::askForSurrender()
+{
+    char input;
+    while(true)
+    {
+        printw("Are you sure you want to end fight early?\n");
+        input = getch();
+        if(input == 'y')
+        {
+            return true;
+        }
+        else if (input == 'n')
+        {
+            return false;
+        }
+        else
+        {
+            printw("Please enter a valid option!\n");
+            getch();
+        }
+    }
 }
 
 void Duel::prepareForFight()
@@ -99,7 +118,8 @@ void Duel::changeDistance()
         printw("Your hp: %.2f - Oponent hp: %.2f\n", player_->health_, oponent_->health_);
         // Show weapon acc and dmg 
         printw("Do you want to get closer or further?\n");
-        printw("<-/'a' closer | further ->/'d'\n");                        
+        printw("<-/'a' closer | further ->/'d'\n");
+        printw("You can also force quit the duel pressing 'q'\n");
         bool exitLoop = false;
         input = getch();
         //clear window
@@ -133,13 +153,25 @@ void Duel::changeDistance()
             case 27:
                 exitLoop = true;
                 break;
+            case 'q':
+            case 'Q':
+                if(askForSurrender())
+                {
+                    isCutShort_ = true;
+                    printw("Game ends early!\n");
+                    getch();
+                    if(fightArena)
+                    {
+                        delete fightArena;
+                    }
+                    return;
+                }
             default:
                 printw("Please use arrow keys to move!\n");
                 getch();
                 break;
         }
 
-        // TODO: Make screen refresh here is possible
         clear();
 
         // Check if exit
@@ -164,6 +196,11 @@ void Duel::announceWinner()
     bool hasPlayerWon = false;
     bool wasTie = false;
     Graphics::Arena* winScreen = new Graphics::Arena;
+
+    if(isCutShort_)
+    {
+        printw("This duel was cut short!\n");
+    }
 
     // Set condition values
     playerDmgDealt_ = enemyStartingHp_ - oponent_->health_;

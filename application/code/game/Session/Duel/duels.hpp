@@ -18,6 +18,7 @@ private:
     uint32_t reward_;
     int expReward_;
     int duelShotCount_;
+    bool isCutShort_;
 
     double playerStartingHp_;
     double enemyStartingHp_;
@@ -31,11 +32,15 @@ private:
     double distance_;
     void changeDistance();
     void calculateReward();
-    
+
 public:
     void prepareForFight();
     Shooter* shootOut();
     void announceWinner();
+    bool askForSurrender();  
+
+    bool getIsCutShort() const { return isCutShort_; }
+
     Duel(Player* player, Shooter* oponent);
     ~Duel();
 };
