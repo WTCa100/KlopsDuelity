@@ -3,7 +3,7 @@ add_executable(${PROJECT_NAME} ./main.cpp)
 add_subdirectory(./code)
 include_directories(./code)
 
-#include every new library here
+#include every new library here0
 target_link_libraries(${PROJECT_NAME}
     Application
     NIO
@@ -27,4 +27,7 @@ target_link_libraries(${PROJECT_NAME}
     weapon
     springfield1835
     moukahla
+    tanegashima
+    Enfield1861
+    Hulverin
 )

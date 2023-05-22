@@ -12,6 +12,6 @@ namespace entities::weapons::muskets
         baseAccuracy_ = 0.23;
     }
     
-    Moukahla::~Moukahla(){}
+    Moukahla::~Moukahla() = default;
     
 } // namespace entities::weapons::muskets

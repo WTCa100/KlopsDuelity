@@ -1,2 +1,5 @@
 add_subdirectory(./Springfield1835)
 add_subdirectory(./Moukahla)
+add_subdirectory(./Enfield1861)
+add_subdirectory(./Tanegashima)
+add_subdirectory(./Hulverin)
