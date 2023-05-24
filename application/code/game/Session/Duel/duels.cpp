@@ -37,7 +37,7 @@ bool Duel::askForSurrender()
     {
         printw("Are you sure you want to end fight early?\n");
         input = getch();
-        if(input == 'y')
+        if(input == 'y' || input == '\n' || input == KEY_ENTER)
         {
             return true;
         }
@@ -77,6 +77,12 @@ Shooter* Duel::shootOut()
         round == 0 ? printw("First turn goes to %s\n", player_->name_.c_str()) : 
                      printw("The turn goes to %s\n", player_->name_.c_str());
         changeDistance();
+
+        // Check if the game was cut short
+        if(isCutShort_)
+        {
+            break;
+        }
         player_->fireWeapon(oponent_, distance_);
         player_->addPlayerShotCount();
         duelShotCount_++;
@@ -252,7 +258,15 @@ void Duel::announceWinner()
 
 Duel::~Duel()
 {
-    printw("Duel has concluded %s won!\n", winner_->name_.c_str());
+    if(winner_)
+    {
+        printw("Duel has concluded %s won!\n", winner_->name_.c_str());
+    }
+    else
+    {
+        printw("Duel has concluded with a tie!\n");
+    }
+    
     if(!player_->isDead_)
     {
         player_->giveExp(expReward_);
