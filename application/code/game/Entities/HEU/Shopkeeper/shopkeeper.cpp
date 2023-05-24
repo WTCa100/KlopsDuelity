@@ -5,6 +5,10 @@
 // Import every weapon
 #include "../../Weapons/Muskets/Springfield1835/springfield1835.hpp"
 #include "../../Weapons/Muskets/Moukahla/moukahla.hpp"
+#include "../../Weapons/Muskets/Enfield1861/Enfield1861.hpp"
+#include "../../Weapons/Muskets/Hulverin/Hulverin.hpp"
+#include "../../Weapons/Muskets/Tanegashima/Tanegashima.hpp"
+
 namespace entities::HEUTypes
 {
 
@@ -71,12 +75,14 @@ namespace entities::HEUTypes
     {
         // Show it visually 
         Weapon* selectedWeapon = weaponsForSale_[itemId].first;
-        selectedWeapon->presentStats();
+        selectedWeapon->presentStats(true);
     }
 
     bool Shopkeeper::tryToSell(int itemId)
     {
         Weapon* desiredWeapon = weaponsForSale_[itemId].first;
+        double currentPlayerBalance = customer_->getMoney();
+        double finalPrice = desiredWeapon->getWeaponModPrice(customer_->getStatVit());
         // Player shall not have any duplicate weapons
         for(auto weapon : customer_->getWeaponsOwned())
         {
@@ -88,13 +94,15 @@ namespace entities::HEUTypes
         }
 
         // Check ammount of money
-        if(customer_->getMoney() < desiredWeapon->getWeaponBasePrice())
+        if(currentPlayerBalance < finalPrice)
         {
             printw("Not enough money!\n");
             return false;
         }
 
+        // Substract money out of player
         printw("You have bought %s\n", desiredWeapon->getWeaponName().c_str());
+        customer_->setMoney(currentPlayerBalance - finalPrice);
         return true;
 
     }
@@ -111,7 +119,10 @@ namespace entities::HEUTypes
         weaponsForSale_ = 
         {
             std::make_pair(new entities::weapons::muskets::Springfield1835, false),
-            std::make_pair(new entities::weapons::muskets::Moukahla, false)
+            std::make_pair(new entities::weapons::muskets::Moukahla, false),
+            std::make_pair(new entities::weapons::muskets::Enfield1861, false),
+            std::make_pair(new entities::weapons::muskets::Hulverin, false),
+            std::make_pair(new entities::weapons::muskets::Tanegashima, false)
             /*Add more weapons later*/
         };
     }

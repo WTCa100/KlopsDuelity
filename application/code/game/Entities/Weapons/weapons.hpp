@@ -3,6 +3,8 @@
 #include <string>
 #include <ctime>
 
+const int MAX_PLAYER_CHARISMA_DISCOUNT = 60;
+
 namespace entities
 {
     class Weapon
@@ -18,7 +20,7 @@ namespace entities
     public:
         Weapon();
         Weapon(std::string wName);
-        void presentStats(bool isInShoop = false);
+        void presentStats(bool isInShoop = false, int playerCharisma = 1);
         virtual bool shoot(const double distance);
         // Aim - raises accuracy but lowers reward (both honor and money)
         virtual ~Weapon();
@@ -28,6 +30,7 @@ namespace entities
         double getWeaponBaseDmg() const {return baseDmg_;}
         double getWeaponBaseAccuracy() const {return baseAccuracy_;}
         double getWeaponBasePrice() const {return basePrice_;}
+        double getWeaponModPrice(const int& playerCharisma = 1);
 
     };
 

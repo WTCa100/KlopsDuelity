@@ -7,6 +7,7 @@ namespace entities::weapons::muskets
 {
     class Hulverin : public Weapon
     {
+        public:
         Hulverin();
         ~Hulverin() = default;
     };

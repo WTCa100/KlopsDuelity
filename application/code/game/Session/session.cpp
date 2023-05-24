@@ -14,7 +14,9 @@
 #include "../Entities/Weapons/weapons.hpp"
 #include "../Entities/Weapons/Muskets/Moukahla/moukahla.hpp"
 #include "../Entities/Weapons/Muskets/Springfield1835/springfield1835.hpp"
-
+#include "../Entities/Weapons/Muskets/Enfield1861/Enfield1861.hpp"
+#include "../Entities/Weapons/Muskets/Hulverin/Hulverin.hpp"
+#include "../Entities/Weapons/Muskets/Tanegashima/Tanegashima.hpp"
 
 Session::Session(FManager* fMgr ) : mainCharacter_(nullptr), fighting_(nullptr), heuCount_(), fMgr_(fMgr)
 {
@@ -121,7 +123,10 @@ entities::HEUTypes::Shooter* Session::generateOponent(oponentDifficulty difLvl)
     // Initialize all possible weapons and allocate them
     std::vector<entities::Weapon*> weaponChoices = 
     { new entities::weapons::muskets::Springfield1835,
-      new entities::weapons::muskets::Moukahla};
+      new entities::weapons::muskets::Moukahla,
+      new entities::weapons::muskets::Hulverin,
+      new entities::weapons::muskets::Tanegashima,
+      new entities::weapons::muskets::Enfield1861};
     // To keep track which delete later, we will store information which weapon was choosen
     size_t pickedWeapon = 0;
 
@@ -210,7 +215,7 @@ entities::HEUTypes::Shooter* Session::pickOponent()
     listOfVilains[0] = generateOponent(oponentDifficulty::kEasy);
     listOfVilains[1] = generateOponent(oponentDifficulty::kMediocore);
     listOfVilains[2] = generateOponent(oponentDifficulty::kHard);
-    std::string choosenOponent; 
+    std::string choosenOption; 
     while(true)
     {
         clear();
@@ -226,11 +231,11 @@ entities::HEUTypes::Shooter* Session::pickOponent()
                     listOfVilains[enemyId]->getStatAim());
         }
         printw("Your option: ");
-        InputCheck::helperInsertInputIntoContainer(choosenOponent);
+        InputCheck::helperInsertInputIntoContainer(choosenOption);
 
-        printw("Picked: %s\n", choosenOponent.c_str());
+        printw("Picked: %s\n", choosenOption.c_str());
         getch();
-        if(InputCheck::isStringNumberInRange(choosenOponent, 3))
+        if(InputCheck::isStringNumberInRange(choosenOption, 3))
         {
             break;
         }
@@ -244,13 +249,13 @@ entities::HEUTypes::Shooter* Session::pickOponent()
 
     for(int enemyId = 0; enemyId < listOfVilains.size(); enemyId++)
     {
-        if(enemyId != std::stoi(choosenOponent) - 1)
+        if(enemyId != std::stoi(choosenOption) - 1)
         {
             delete listOfVilains[enemyId];
         }
     }
 
-    return listOfVilains[std::stoi(choosenOponent) - 1];
+    return listOfVilains[std::stoi(choosenOption) - 1];
 }
 
 void Session::duel()

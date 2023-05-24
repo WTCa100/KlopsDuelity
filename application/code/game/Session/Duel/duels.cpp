@@ -24,9 +24,9 @@ void Duel::calculateReward()
     // Minimal value to win
     int rewardBase = 100;
 
-    reward_ = Modifiers::duelReward(oponent_->currentlyHeldWeapon_->getWeaponBaseDmg(),
-                                    oponent_->currentlyHeldWeapon_->getWeaponBaseAccuracy(),
-                                    distance_, player_->statCharisma_, rewardBase);
+    reward_ = Modifiers::calculateDuelReward(oponent_->currentlyHeldWeapon_->getWeaponBaseDmg(),
+                                             oponent_->currentlyHeldWeapon_->getWeaponBaseAccuracy(),
+                                             distance_, player_->statCharisma_, rewardBase);
 
 }
 

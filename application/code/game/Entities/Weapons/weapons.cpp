@@ -18,17 +18,22 @@ namespace entities
         wIdGlobal_++; 
     }
 
-    void Weapon::presentStats(bool isInShoop)
+    void Weapon::presentStats(bool isInShoop, int playerCharisma)
     {
         printw("Name: %s\n", name_.c_str());
         printw("Weapon Stats:\n");
         printw("Accuracy: %.2f\n", baseAccuracy_);
-        printw("Damage: %d\n", baseDmg_);
+        printw("Damage: %.0f\n", baseDmg_);
 
         if(isInShoop)
         {
-            printw("Pirce: %d\n", basePrice_);
+            printw("Pirce: %.2f\n", Modifiers::calculateWeaponPrice(basePrice_, playerCharisma));
         }
+    }
+
+    double Weapon::getWeaponModPrice(const int& playerCharisma)
+    {
+        return Modifiers::calculateWeaponPrice(basePrice_, playerCharisma);
     }
 
     bool Weapon::shoot(/*List modifier*/ const double distance)

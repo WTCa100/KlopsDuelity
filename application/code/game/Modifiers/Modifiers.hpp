@@ -2,9 +2,9 @@
 namespace Modifiers
 {
 
-    extern int duelReward(const double& enemyWeaponDmg, const double& enemyWeaponAccuracy, 
-                      const double& distance, const int& playerCharisma,
-                      const double& baseReward = 100);
+    extern int calculateDuelReward(const double& enemyWeaponDmg, const double& enemyWeaponAccuracy, 
+                          const double& distance, const int& playerCharisma,
+                          const double& baseReward = 100);
 
     extern double calculateHealth(const int& entityVitality, const double healthBase = 100);
 
@@ -19,5 +19,6 @@ namespace Modifiers
     extern int calculateExpReward(int enemyPower, const double& shotsFired, const int& distance, 
                                   const bool& hasWon = true, const bool& hasEnemyDied = false,
                                   const bool& wasOneShot = false, const bool& wasTie = false);
+    extern double calculateWeaponPrice(double basePrice, int playerCharisma);
 
 } // namespace Modifiers

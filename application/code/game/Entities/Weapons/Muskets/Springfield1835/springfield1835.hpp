@@ -1,7 +1,5 @@
 #pragma once
 
-#include <iostream>
-
 #include "../../weapons.hpp"
 
 namespace entities::weapons::muskets
@@ -14,7 +12,6 @@ namespace entities::weapons::muskets
         ~Springfield1835();
     };  
     
-
 } // namespace entities::weapons::muskets
 
 

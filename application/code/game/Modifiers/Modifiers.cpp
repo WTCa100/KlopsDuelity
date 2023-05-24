@@ -5,7 +5,7 @@
 namespace Modifiers
 {
 
-    int duelReward(const double& enemyWeaponDmg, const double& enemyWeaponAccuracy, 
+    int calculateDuelReward(const double& enemyWeaponDmg, const double& enemyWeaponAccuracy, 
                       const double& distance, const int& playerCharisma,
                       const double& baseReward)
     {
@@ -109,6 +109,22 @@ namespace Modifiers
         }
 
         return finalExp;
+    }
+
+    double calculateWeaponPrice(double basePrice, int playerCharisma)
+    {
+        if(playerCharisma == 0)
+        {
+            return basePrice;
+        }
+
+        if(playerCharisma > 100)
+        {
+            return 1;
+        }
+
+        return basePrice -= basePrice * (static_cast<double>(playerCharisma) / 100);  
+
     }
 
 } // namespace Modifiers
