@@ -18,7 +18,7 @@
 #include "../Entities/Weapons/Muskets/Hulverin/Hulverin.hpp"
 #include "../Entities/Weapons/Muskets/Tanegashima/Tanegashima.hpp"
 
-Session::Session(FManager* fMgr ) : mainCharacter_(nullptr), fighting_(nullptr), heuCount_(), fMgr_(fMgr)
+Session::Session() : mainCharacter_(nullptr), fighting_(nullptr), heuCount_()
 {
     clear();
 }
@@ -34,7 +34,6 @@ Session::~Session()
         printw("Teardown entity\n");
         delete entity;
     }
-    delete save_;
     printw("Session ends\n");
 }
 

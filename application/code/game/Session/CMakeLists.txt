@@ -1,5 +1,4 @@
 add_subdirectory(./Duel)
-add_subdirectory(./Gamestate)
 
 add_library(Session STATIC session.cpp session.hpp)
 

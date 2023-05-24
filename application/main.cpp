@@ -6,8 +6,6 @@
 #include <ncurses.h>
 #include "./code/utilities/IOStream/NIO.hpp"
 
-#include "./code/utilities/Toolbox/FileManager/Fmanager.hpp"
-
 int main()
 {
     // Initialize necessery functionality
