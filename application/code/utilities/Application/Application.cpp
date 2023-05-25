@@ -34,7 +34,7 @@ void Application::startApp()
     // If statements for now - change to switch later
     if(mainMenu->getActionChoosen() == MenuOptions::kStartGame || mainMenu->getActionChoosen() == MenuOptions::kNone)
     {
-        Session* gameSession = new Session(fMgr_);
+        Session* gameSession = new Session();
         gameSession->core();
         delete gameSession;
     }

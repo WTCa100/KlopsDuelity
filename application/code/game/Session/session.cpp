@@ -16,7 +16,7 @@
 #include "../Entities/Weapons/Muskets/Springfield1835/springfield1835.hpp"
 
 
-Session::Session(FManager* fMgr ) : mainCharacter_(nullptr), fighting_(nullptr), heuCount_(), fMgr_(fMgr)
+Session::Session() : mainCharacter_(nullptr), fighting_(nullptr), heuCount_()
 {
     clear();
 }
@@ -32,7 +32,6 @@ Session::~Session()
         printw("Teardown entity\n");
         delete entity;
     }
-    delete save_;
     printw("Session ends\n");
 }
 
@@ -225,14 +224,23 @@ entities::HEUTypes::Shooter* Session::pickOponent()
                     listOfVilains[enemyId]->getStatVit(), listOfVilains[enemyId]->getStatCharisma(),
                     listOfVilains[enemyId]->getStatAim());
         }
+        printw("Type 'quit' to exit\n");
         printw("Your option: ");
         InputCheck::helperInsertInputIntoContainer(choosenOponent);
-
+        
         printw("Picked: %s\n", choosenOponent.c_str());
         getch();
         if(InputCheck::isStringNumberInRange(choosenOponent, 3))
         {
             break;
+        }
+        else if(InputCheck::helperStringToLower(choosenOponent) == "quit" || tolower(choosenOponent[0]) == 'q' )
+        {
+            for(auto heu : listOfVilains)
+            {
+                if(heu) delete heu;
+            }
+            return nullptr;
         }
         else
         {
@@ -256,9 +264,12 @@ entities::HEUTypes::Shooter* Session::pickOponent()
 void Session::duel()
 {
     entities::HEUTypes::Shooter* enemy = pickOponent();
-    heuCount_.push_back(enemy);
-    fighting_ = new Duel(mainCharacter_, enemy);
-    fighting_->prepareForFight();
-    fighting_->shootOut();
-    delete fighting_;
+    if(enemy)
+    {
+        heuCount_.push_back(enemy);
+        fighting_ = new Duel(mainCharacter_, enemy);
+        fighting_->prepareForFight();
+        fighting_->shootOut();
+        delete fighting_;
+    }
 }
