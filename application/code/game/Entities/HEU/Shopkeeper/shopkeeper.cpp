@@ -107,7 +107,6 @@ namespace entities::HEUTypes
 
     Shopkeeper::Shopkeeper(Player* customer) : HEU(false, "no_name_entity"), customer_(customer)
     {
-        printw("%s Entered shop: Shopkeeper spawned", customer->getEntityName().c_str());
         weaponsForSale_ = 
         {
             std::make_pair(new entities::weapons::muskets::Springfield1835, false),

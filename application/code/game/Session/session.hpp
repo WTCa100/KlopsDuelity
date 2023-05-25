@@ -10,12 +10,6 @@
 #include "../Entities/HEU/Shooter/shooter.hpp"
 #include "../Player/player.hpp"
 
-// Toolbox
-#include "../../utilities/Toolbox/FileManager/Fmanager.hpp"
-
-// Saving
-#include "./Gamestate/gameSave.hpp"
-
 // Menus
 #include "../Display/Menu/SessionMainScreen/SessionMainScreen.hpp"
 
@@ -30,11 +24,9 @@ class Session
     private:
     // Config
     // Store information about every heu
-    gameSave* save_;
     std::vector<entities::HEU*> heuCount_;
     Duel* fighting_;
     Player* mainCharacter_;
-    FManager* fMgr_;
     public:
     entities::HEUTypes::Shooter* pickOponent();
     entities::HEUTypes::Shooter* generateOponent(oponentDifficulty difLvl);
@@ -45,6 +37,6 @@ class Session
     void duel();
 
     // Ctor/Dtor
-    Session(FManager* fMgr/*pass config*/);
+    Session();
     ~Session();
 };
