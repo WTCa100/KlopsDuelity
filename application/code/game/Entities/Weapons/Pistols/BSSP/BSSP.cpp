@@ -6,6 +6,6 @@ namespace entities::weapons::pistols
     {
         basePrice_ = 30;
         baseDmg_ = 20;
-        baseAccuracy_ = 10;
+        baseAccuracy_ = 0.10;
     }
 } // namespace entities::weapons::pistols
