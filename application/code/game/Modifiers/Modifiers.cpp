@@ -105,7 +105,7 @@ namespace Modifiers
         if(wasTie)
         {
             // get a fraction of 10% of normal exp value
-            finalExp = finalExp * 0.90;
+            finalExp = finalExp * 0.10;
         }
 
         return finalExp;

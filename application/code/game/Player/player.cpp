@@ -60,6 +60,60 @@ void Player::levelUp()
 
 }
 
+void Player::pickWeapon()
+{
+    noecho();
+    uint16_t pointedWeapon = 0;
+    bool exitLoop = false;
+
+    printw("Pick your weapon!\n");
+    while(!exitLoop)
+    {
+        weaponsOwned_[pointedWeapon]->presentStats();
+        printw("Change weapon <- previous item | next item ->\n");
+        printw("Pick %s [Enter]\n", weaponsOwned_[pointedWeapon]->getWeaponName().c_str());
+        uint choosenOption = getch();
+        switch (choosenOption)
+        {
+        case KEY_ENTER:
+        case      '\n':
+            setCurrentlyHeldWeapon(weaponsOwned_[pointedWeapon]);
+            exitLoop = true;
+            break;
+        case KEY_LEFT:
+            if(pointedWeapon == weaponsOwned_.size() - 1)
+            {
+                pointedWeapon = 0;
+            }
+            else
+            {
+                ++pointedWeapon;
+            }
+            clear();
+            break;
+        case KEY_RIGHT:
+            if(pointedWeapon == 0)
+            {
+                pointedWeapon = weaponsOwned_.size() - 1;
+            }
+            else
+            {
+                --pointedWeapon;
+            }
+            clear();
+            break;
+        default:
+            printw("Please enter a valid option!\n");
+            break;
+        }
+    }
+    clear();
+
+    printw("Player picked %s\n", getCurrentlyHeldWeapon()->getWeaponName().c_str());
+    getch();
+    echo();
+}
+
 void Player::showFullGameStats()
 {
     printw("Name: %s\n", name_.c_str());
@@ -99,7 +153,6 @@ void Player::levelStat()
     
     while(!isStatAssigned)
     {
-        printw("!-- DEBUG CURRENT STAT %d\n", currentStat);
         printw("What stat you would like to level up?\n");
         printw(" Use arrow keys to navigate\n");
         printw("Aim: %d", statAim_);
