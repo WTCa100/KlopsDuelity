@@ -126,13 +126,7 @@ namespace entities::HEUTypes
 
     void Shooter::pickWeapon()
     {
-        if(isPlayer_)
-        {
-            printw("Pick your weapon: \n");
-            getch();
-        }
-
-        printw("%s said \"I will be using %s for the duel", name_.c_str(), currentlyHeldWeapon_->getWeaponName());
+        printw("%s said \"I will be using %s for the duel", name_.c_str(), currentlyHeldWeapon_->getWeaponName().c_str());
         currentlyHeldWeapon_->presentStats();
     }
     

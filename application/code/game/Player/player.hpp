@@ -31,6 +31,7 @@ class Player : public Shooter
     int exp_;
 
     public:
+    void pickWeapon() override;
     void levelUp();
     bool checkForLevelUp();
     void giveExp(int exp);

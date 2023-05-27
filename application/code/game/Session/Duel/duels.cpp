@@ -66,6 +66,9 @@ void Duel::prepareForFight()
         oponent_->pickWeapon();
     }
 
+    printw("Press any key to continue...\n");
+    getch();
+
 }
 
 Shooter* Duel::shootOut()
@@ -229,7 +232,15 @@ void Duel::announceWinner()
     {
         wasTie = true;
         winner_ = nullptr;
-        printw("No one has one a duel, it's a tie!\n");
+        printw("No one has won a duel! ");
+        if(wasTie)
+        {
+            printw("It is a tie.\n");
+        }
+        else
+        {
+            printw("\n");
+        }
     }
     else
     {
@@ -252,7 +263,18 @@ void Duel::announceWinner()
         wasOneShot = true;
     }
 
-    expReward_ = Modifiers::calculateExpReward(oponent_->getPower(), duelShotCount_, distance_, hasPlayerWon, oponent_->isDead_, wasOneShot, wasTie);
+    // If duel was canceled and no show was fired do not grant player any exp
+    if(!(duelShotCount_ == 0 && wasTie))
+    {
+        expReward_ = Modifiers::calculateExpReward(oponent_->getPower(), duelShotCount_, distance_, hasPlayerWon, oponent_->isDead_, wasOneShot, wasTie);
+    }
+    else
+    {
+        printw("Duel was canceled! No reward this time\n");
+        printw("Press any key to continue...\n");
+        getch();
+    }
+
 
 }
 
