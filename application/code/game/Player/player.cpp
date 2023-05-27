@@ -104,6 +104,9 @@ void Player::pickWeapon()
             break;
         default:
             printw("Please enter a valid option!\n");
+            printw("Press any key to continue...\n");
+            getch();
+            clear();
             break;
         }
     }
@@ -122,12 +125,13 @@ void Player::showFullGameStats()
     printw("Duels won: %d\n", duelsWonCount_);
     printw("Shots fired: %d\n", 0); // TODO
     printw("Money %d\n", money_);
-    printw("Money won: %d\n", moneyWon_); // TODO
+    printw("Money won: %d\n", moneyWon_);
 
     printw("Character stats:\n");
     printw("Level: %d\n", level_);
     printw("Current Exp: %d\n", exp_);
     printw("Required Exp: %d\n", requiredExp_);
+    printw("Power: %d\n", power_);
     printw("Vitality: %d\n", statVitality_);
     printw("Charisma: %d\n", statCharisma_);
     printw("Aim: %d\n", statAim_);        

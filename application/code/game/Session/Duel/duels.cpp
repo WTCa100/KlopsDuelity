@@ -175,6 +175,11 @@ void Duel::changeDistance()
                     }
                     return;
                 }
+                else
+                {
+                    clear();
+                    continue;
+                }
             default:
                 printw("Please use arrow keys to move!\n");
                 getch();
