@@ -34,3 +34,13 @@ bool InputCheck::isStringNumberInRange(const std::string& input, int maxVal, int
     return stringNumericValue >= minVal && stringNumericValue <= maxVal;
 
 }
+
+std::string InputCheck::helperStringToLower(std::string input)
+{
+    std::string lowerInput = "";
+    for(auto ch : input)
+    {
+        lowerInput += tolower(ch);
+    }
+    return lowerInput;
+}

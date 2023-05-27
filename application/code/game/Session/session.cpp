@@ -229,6 +229,7 @@ entities::HEUTypes::Shooter* Session::pickOponent()
                     listOfVilains[enemyId]->getStatVit(), listOfVilains[enemyId]->getStatCharisma(),
                     listOfVilains[enemyId]->getStatAim());
         }
+        printw("Type 'quit' to exit\n");
         printw("Your option: ");
         InputCheck::helperInsertInputIntoContainer(choosenOption);
 
@@ -237,6 +238,14 @@ entities::HEUTypes::Shooter* Session::pickOponent()
         if(InputCheck::isStringNumberInRange(choosenOption, 3))
         {
             break;
+        }
+        else if(InputCheck::helperStringToLower(choosenOption) == "quit" || tolower(choosenOption[0]) == 'q' )
+        {
+            for(auto heu : listOfVilains)
+            {
+                if(heu) delete heu;
+            }
+            return nullptr;
         }
         else
         {
@@ -260,9 +269,12 @@ entities::HEUTypes::Shooter* Session::pickOponent()
 void Session::duel()
 {
     entities::HEUTypes::Shooter* enemy = pickOponent();
-    heuCount_.push_back(enemy);
-    fighting_ = new Duel(mainCharacter_, enemy);
-    fighting_->prepareForFight();
-    fighting_->shootOut();
-    delete fighting_;
+    if(enemy)
+    {
+        heuCount_.push_back(enemy);
+        fighting_ = new Duel(mainCharacter_, enemy);
+        fighting_->prepareForFight();
+        fighting_->shootOut();
+        delete fighting_;
+    }
 }
