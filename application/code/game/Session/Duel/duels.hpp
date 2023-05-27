@@ -11,6 +11,11 @@
 #include "../../Entities/HEU/Shooter/shooter.hpp"
 #include "../../Player/player.hpp"
 
+const bool DUEL_WINNER_PLAYER = true;
+const bool DUEL_WINNER_ENEMY  = false;
+const uint16_t MAX_DUEL_DISTANCE = 125;
+const uint16_t MIN_DUEL_DISTANCE = 4;
+
 class Duel
 {
 friend class entities::HEU;

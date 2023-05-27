@@ -4,7 +4,7 @@
 
 namespace entities::weapons::muskets
 {
-    Tanegashima::Tanegashima() : Weapon("Tanegashima")
+    Tanegashima::Tanegashima() : Weapon("Tanegashima", WEAPON_TYPE_MUSKET)
     {
         basePrice_ = 135;
         baseDmg_ = 45;

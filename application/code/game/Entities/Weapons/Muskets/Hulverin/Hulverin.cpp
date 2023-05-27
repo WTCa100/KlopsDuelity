@@ -5,7 +5,7 @@
 
 namespace entities::weapons::muskets
 {
-    Hulverin::Hulverin() : Weapon("Hulverin")
+    Hulverin::Hulverin() : Weapon("Hulverin", WEAPON_TYPE_MUSKET)
     {
         basePrice_ = 360;
         baseDmg_ = 50;

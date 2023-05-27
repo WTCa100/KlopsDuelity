@@ -135,9 +135,9 @@ void Duel::changeDistance()
             case KEY_RIGHT:
             case 'A':
             case 'a':
-                if(distance_ == 125)
+                if(distance_ == MAX_DUEL_DISTANCE)
                 {
-                    printw("Distance cannot be greater than 125!\n");
+                    printw("Distance cannot be greater than %d!\n", MAX_DUEL_DISTANCE);
                     getch();
                     break;
                 }     
@@ -146,9 +146,9 @@ void Duel::changeDistance()
             case KEY_LEFT:
             case 'D':
             case 'd':
-                if(distance_ == 1)
+                if(distance_ == MIN_DUEL_DISTANCE)
                 {
-                    printw("Distance cannot be lower than 1!\n");
+                    printw("Distance cannot be lower than %d!\n", MIN_DUEL_DISTANCE);
                     getch();
                     break;
                 }        
@@ -218,7 +218,7 @@ void Duel::announceWinner()
     if(playerDmgDealt_ < enemyDmgDealt_ || player_->isDead_)
     {
         winner_ = oponent_;
-        winScreen->winScreen(false);
+        winScreen->winScreen(DUEL_WINNER_ENEMY);
         printw("%s has won!\n", oponent_->name_.c_str());
         if(player_->isDead_)
         {
@@ -233,7 +233,7 @@ void Duel::announceWinner()
     }
     else
     {
-        winScreen->winScreen(true);
+        winScreen->winScreen(DUEL_WINNER_PLAYER);
         player_->duelsWonCount_ ++;
         player_->setMoney(player_->getMoney() + reward_);
         player_->setMoneyWon(player_->getMoneyWon() + reward_);

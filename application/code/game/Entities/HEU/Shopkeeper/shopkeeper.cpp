@@ -8,6 +8,8 @@
 #include "../../Weapons/Muskets/Enfield1861/Enfield1861.hpp"
 #include "../../Weapons/Muskets/Hulverin/Hulverin.hpp"
 #include "../../Weapons/Muskets/Tanegashima/Tanegashima.hpp"
+#include "../../Weapons/Pistols/BSSP/BSSP.hpp"
+#include "../../Weapons/Pistols/HarpersFerry1805/HarpersFerry1805.hpp"
 
 namespace entities::HEUTypes
 {
@@ -122,7 +124,9 @@ namespace entities::HEUTypes
             std::make_pair(new entities::weapons::muskets::Moukahla, false),
             std::make_pair(new entities::weapons::muskets::Enfield1861, false),
             std::make_pair(new entities::weapons::muskets::Hulverin, false),
-            std::make_pair(new entities::weapons::muskets::Tanegashima, false)
+            std::make_pair(new entities::weapons::muskets::Tanegashima, false),
+            std::make_pair(new entities::weapons::pistols::BSSP, false),
+            std::make_pair(new entities::weapons::pistols::HarpersFerry1805, false)
             /*Add more weapons later*/
         };
     }

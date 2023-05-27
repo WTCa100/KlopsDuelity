@@ -17,6 +17,8 @@
 #include "../Entities/Weapons/Muskets/Enfield1861/Enfield1861.hpp"
 #include "../Entities/Weapons/Muskets/Hulverin/Hulverin.hpp"
 #include "../Entities/Weapons/Muskets/Tanegashima/Tanegashima.hpp"
+#include "../Entities/Weapons/Pistols/BSSP/BSSP.hpp"
+#include "../Entities/Weapons/Pistols/HarpersFerry1805/HarpersFerry1805.hpp"
 
 Session::Session() : mainCharacter_(nullptr), fighting_(nullptr), heuCount_()
 {
@@ -125,9 +127,15 @@ entities::HEUTypes::Shooter* Session::generateOponent(oponentDifficulty difLvl)
       new entities::weapons::muskets::Moukahla,
       new entities::weapons::muskets::Hulverin,
       new entities::weapons::muskets::Tanegashima,
-      new entities::weapons::muskets::Enfield1861};
+      new entities::weapons::muskets::Enfield1861,
+      new entities::weapons::pistols::BSSP,
+      new entities::weapons::pistols::HarpersFerry1805};
+
     // To keep track which delete later, we will store information which weapon was choosen
     size_t pickedWeapon = 0;
+
+    // Make sure that harder enemies will not have any chance to spawn with pistols (for now)
+    const int nonEasyWeaponThreshold = 5;
 
     // If player stats are only zero-s then return dummy 0/0/0
     if(mainCharacter_->getStatAim() == 0 && mainCharacter_->getStatCharisma() == 0 && mainCharacter_->getStatVit() == 0)
@@ -172,7 +180,7 @@ entities::HEUTypes::Shooter* Session::generateOponent(oponentDifficulty difLvl)
             returnOponent->setStatAim(rand() % refMaxStat * 0.80 + rand() % refMaxStat * 1.20);
             returnOponent->setStatCharisma(rand() % refMaxStat * 0.80 + rand() % refMaxStat * 1.20);
             returnOponent->setStatVit(rand() % refMaxStat * 0.80 + rand() % refMaxStat * 1.20);
-            pickedWeapon = rand() % weaponChoices.size();
+            pickedWeapon = rand() % nonEasyWeaponThreshold;
             returnOponent->setCurrentlyHeldWeapon( weaponChoices[pickedWeapon] );
         } while (returnOponent->getPower() > (powerRefferencePoint * 1.20) || returnOponent->getPower() < (powerRefferencePoint * 0.80));
          
@@ -186,7 +194,7 @@ entities::HEUTypes::Shooter* Session::generateOponent(oponentDifficulty difLvl)
             returnOponent->setStatAim(rand() % refMaxStat * 1.20 + rand() % refMaxStat * 2.50);
             returnOponent->setStatCharisma(rand() % refMaxStat * 1.20 + rand() % refMaxStat * 2.50);
             returnOponent->setStatVit(rand() % refMaxStat * 1.20 + rand() % refMaxStat * 2.50);
-            pickedWeapon = rand() % weaponChoices.size();
+            pickedWeapon = rand() % nonEasyWeaponThreshold;
             returnOponent->setCurrentlyHeldWeapon( weaponChoices[pickedWeapon] );
         } while (returnOponent->getPower() > (powerRefferencePoint * 2.50) || returnOponent->getPower() < (powerRefferencePoint * 1.20));
          

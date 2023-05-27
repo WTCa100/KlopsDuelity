@@ -13,7 +13,7 @@
 #include "../Entities/Weapons/Muskets/Springfield1835/springfield1835.hpp"
 #include "../Entities/Weapons/Muskets/Moukahla/moukahla.hpp"
 
-Player::Player(std::string name) : Shooter(true, name), money_(100), pOrigin_(new Origin), level_(1), exp_(0), requiredExp_(1000), duelCount_(0), playerGlobalShotCount_(0)
+Player::Player(std::string name) : Shooter(true, name), money_(10), pOrigin_(new Origin), level_(1), exp_(0), requiredExp_(1000), duelCount_(0), playerGlobalShotCount_(0)
 {
     // Make player choose starting weapon later / weapon will be determined on origin (preferable)
     getStatsFromOrigin();   
