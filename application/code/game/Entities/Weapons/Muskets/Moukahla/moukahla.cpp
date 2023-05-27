@@ -5,7 +5,7 @@
 namespace entities::weapons::muskets
 {
     
-    Moukahla::Moukahla() : Weapon("Moukahla")
+    Moukahla::Moukahla() : Weapon("Moukahla", WEAPON_TYPE_MUSKET)
     {
         basePrice_ = 100;
         baseDmg_ = 35;

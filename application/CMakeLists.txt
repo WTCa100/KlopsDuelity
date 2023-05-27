@@ -28,4 +28,6 @@ target_link_libraries(${PROJECT_NAME}
     tanegashima
     Enfield1861
     Hulverin
+    BSSP
+    HarpersFerry1805
 )

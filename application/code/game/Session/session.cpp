@@ -233,8 +233,7 @@ entities::HEUTypes::Shooter* Session::pickOponent()
         printw("Your option: ");
         InputCheck::helperInsertInputIntoContainer(choosenOption);
 
-        printw("Picked: %s\n", choosenOption.c_str());
-        getch();
+        clear();
         if(InputCheck::isStringNumberInRange(choosenOption, 3))
         {
             break;

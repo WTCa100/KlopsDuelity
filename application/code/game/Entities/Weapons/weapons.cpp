@@ -6,13 +6,13 @@ namespace entities
 {
     uint32_t Weapon::wIdGlobal_ = 0;
     
-    Weapon::Weapon()
+    Weapon::Weapon() : weaponType_("UNDEFINED")
     {
         wId_ = wIdGlobal_;
         wIdGlobal_++;
     }
 
-    Weapon::Weapon(std::string wName) : name_(wName)
+    Weapon::Weapon(std::string wName, std::string wType) : name_(wName), weaponType_(wType)
     {
         wId_ = wIdGlobal_;
         wIdGlobal_++; 
