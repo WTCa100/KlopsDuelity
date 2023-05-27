@@ -180,7 +180,6 @@ entities::HEUTypes::Shooter* Session::generateOponent(oponentDifficulty difLvl)
     switch (difLvl)
     {
     case oponentDifficulty::kEasy:
-        // ATM name is changed for possible debug purposes
         returnOponent->setEntityName(generatedName);
         // Assign stats depending on player stats
         // Easy shall generate power of 65 to 80% of Players

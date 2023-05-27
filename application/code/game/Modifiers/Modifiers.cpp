@@ -74,15 +74,11 @@ namespace Modifiers
 
 
         int powerToCalc = enemyPower;
-        printw("FINAL EXP BASE: %d\n", finalExp);
-        printw("FINAL EXP ENEMY QUATER: %d\n", powerToCalc / 4);
         finalExp = finalExp + (powerToCalc / 4) * ( 1.00 - (shotsToCalc / 100));
-        printw("FINAL EXP HANDLE SHOT: %d\n", finalExp);
         // Handle distance
         int distanceToCalc = distance;
         int distanceVal = finalExp * static_cast<double>(distanceToCalc) / 100;
-        finalExp = finalExp + distanceVal;
-        printw("FINAL EXP HANDLE DISTANCE: %d\n", finalExp);        
+        finalExp = finalExp + distanceVal;      
 
         // Handle booleans
         if(hasWon)

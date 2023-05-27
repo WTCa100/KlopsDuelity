@@ -191,7 +191,6 @@ void Player::levelStat()
                 }
                 
                 currentStat--;
-                printw("!-- DEBUG CURRENT STAT CHANGE%d\n", currentStat);
                 clear();
                 break;
             case KEY_RIGHT:
@@ -205,7 +204,6 @@ void Player::levelStat()
 
                 currentStat++;
                 clear();
-                printw("!-- DEBUG CURRENT STAT CHANGE%d\n", currentStat);
                 break;
             case KEY_ENTER:
             case '\n':

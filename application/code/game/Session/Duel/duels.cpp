@@ -171,7 +171,6 @@ void Duel::changeDistance()
                 {
                     isCutShort_ = true;
                     printw("Game ends early!\n");
-                    getch();
                     if(fightArena)
                     {
                         delete fightArena;
