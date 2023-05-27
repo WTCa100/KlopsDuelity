@@ -21,6 +21,7 @@ class Player : public Shooter
     uint32_t money_;
     uint32_t moneyWon_;
     uint16_t playerGlobalShotCount_;
+    uint16_t playerGlobalShotLandedCount_;
     const Origin* pOrigin_;
     std::vector<Weapon*> weaponsOwned_; 
     void getStatsFromOrigin();
@@ -38,6 +39,7 @@ class Player : public Shooter
     void addWeapon(Weapon* newWeapon);
     void showFullGameStats();
     void addPlayerShotCount() { playerGlobalShotCount_++; }
+    void addPlayerShotLandedCount() { playerGlobalShotLandedCount_++; }
 
     // Getters
     size_t getWeaponsOwnedSize() const { return weaponsOwned_.size(); }
@@ -48,11 +50,14 @@ class Player : public Shooter
     int getRequiredExp() const { return requiredExp_; }
     uint16_t getDuelCount() const { return duelCount_; }
     uint32_t getMoneyWon() const { return moneyWon_; }
+    uint16_t getGlobalShotCount() const {return playerGlobalShotCount_; }
+    uint16_t getGlobalShotLandedCount() const { return playerGlobalShotLandedCount_; }
 
     // Setters
     void setMoney(const uint32_t& money) { money_ = money;}
     void setMoneyWon(const uint32_t& moneyWon) { moneyWon_ = moneyWon; }
     void setDuelCount(const uint16_t& duelCount) { duelCount_ = duelCount;}
+    uint16_t setGlobalShotLandedCount(const uint16_t& shotLandedCount) { playerGlobalShotLandedCount_ = shotLandedCount; }
 
     Player(std::string name);
     ~Player();

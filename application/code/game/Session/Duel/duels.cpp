@@ -7,7 +7,7 @@
 #include "../../Display/Graphical/Arena/Arena.hpp"
 
 
-Duel::Duel(Player* player, Shooter* oponent) : player_(player), oponent_(oponent), distance_(12), duelShotCount_(0), playerDmgDealt_(0), enemyDmgDealt_(0)
+Duel::Duel(Player* player, Shooter* oponent) : player_(player), oponent_(oponent), distance_(12), duelShotCount_(0), playerDmgDealt_(0), enemyDmgDealt_(0), roundCount_(0)
 {
     player_->setDuelCount(player_->getDuelCount() + 1);
     playerStartingHp_ = player_->getHealth();
@@ -73,12 +73,13 @@ void Duel::prepareForFight()
 
 Shooter* Duel::shootOut()
 {
-    int round = 0;
-    while((player_->isConcious_ && oponent_->isConcious_) && round < DUEL_MAX_ROUND)
+    int roundCount_ = 0;
+    while((player_->isConcious_ && oponent_->isConcious_) && roundCount_ < DUEL_MAX_ROUND)
     {
-        printw("Round %d of %d\n", round + 1, DUEL_MAX_ROUND);
-        round == 0 ? printw("First turn goes to %s\n", player_->name_.c_str()) : 
+        printw("Round %d of %d\n", roundCount_ + 1, DUEL_MAX_ROUND);
+        roundCount_ == 0 ? printw("First turn goes to %s\n", player_->name_.c_str()) : 
                      printw("The turn goes to %s\n", player_->name_.c_str());
+        getch();
         changeDistance();
 
         // Check if the game was cut short
@@ -96,7 +97,8 @@ Shooter* Duel::shootOut()
         oponent_->fireWeapon(player_, distance_);
         printw("Press any key to continue...\n");
         getch();
-        round++;
+        clear();
+        roundCount_++;
     }
     getch();
     clear();
@@ -180,6 +182,7 @@ void Duel::changeDistance()
                     clear();
                     continue;
                 }
+                break;
             default:
                 printw("Please use arrow keys to move!\n");
                 getch();

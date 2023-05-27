@@ -22,6 +22,7 @@ private:
     uint32_t reward_;
     int expReward_;
     int duelShotCount_;
+    int roundCount_;
     bool isCutShort_;
 
     double playerStartingHp_;
