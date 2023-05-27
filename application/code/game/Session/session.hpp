@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <vector>
+#include <set>
 
 #include "./Duel/duels.hpp"
 // Abstact
@@ -9,6 +10,9 @@
 // HEUs
 #include "../Entities/HEU/Shooter/shooter.hpp"
 #include "../Player/player.hpp"
+
+// Weapons
+#include "../Entities/Weapons/weapons.hpp"
 
 // Menus
 #include "../Display/Menu/SessionMainScreen/SessionMainScreen.hpp"
@@ -24,6 +28,8 @@ class Session
     private:
     // Config
     // Store information about every heu
+    std::vector<entities::Weapon*> excludeWeaponTypeFromVector(const std::vector<entities::Weapon*>& targetVec, 
+                                                               std::set<std::string> excludeTypes);
     std::vector<entities::HEU*> heuCount_;
     Duel* fighting_;
     Player* mainCharacter_;

@@ -21,6 +21,7 @@ namespace entities
     void Weapon::presentStats(bool isInShoop, int playerCharisma)
     {
         printw("Name: %s\n", name_.c_str());
+        printw("Type: %s\n", weaponType_.c_str());
         printw("Weapon Stats:\n");
         printw("Accuracy: %.2f\n", baseAccuracy_);
         printw("Damage: %.0f\n", baseDmg_);

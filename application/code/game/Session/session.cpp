@@ -11,12 +11,13 @@
 #include "../Entities/HEU/Shopkeeper/shopkeeper.hpp"
 #include "../Entities/HEU/Shooter/Names/Names.hpp"
 // Weapons
-#include "../Entities/Weapons/weapons.hpp"
 #include "../Entities/Weapons/Muskets/Moukahla/moukahla.hpp"
 #include "../Entities/Weapons/Muskets/Springfield1835/springfield1835.hpp"
 #include "../Entities/Weapons/Muskets/Enfield1861/Enfield1861.hpp"
 #include "../Entities/Weapons/Muskets/Hulverin/Hulverin.hpp"
 #include "../Entities/Weapons/Muskets/Tanegashima/Tanegashima.hpp"
+#include "../Entities/Weapons/Pistols/BSSP/BSSP.hpp"
+#include "../Entities/Weapons/Pistols/HarpersFerry1805/HarpersFerry1805.hpp"
 
 Session::Session() : mainCharacter_(nullptr), fighting_(nullptr), heuCount_()
 {
@@ -113,6 +114,32 @@ void Session::core()
     delete mainSessionDisplay;
 }
 
+std::vector<entities::Weapon*> Session::excludeWeaponTypeFromVector(const std::vector<entities::Weapon*>& targetVec, 
+                                                                    std::set<std::string> excludeTypes)
+{
+    std::vector <entities::Weapon*> modifiedVector;
+    // Handle empty set
+    if(excludeTypes.empty())
+    {
+        return targetVec;
+    }
+
+    for(auto excludedType : excludeTypes)
+    {
+        for(auto weaponInVec : targetVec)
+        {
+            if(weaponInVec->getWeaponType() != excludedType)
+            {
+                modifiedVector.push_back(weaponInVec);
+            }
+        }
+    }
+
+    return modifiedVector;
+
+}
+
+
 entities::HEUTypes::Shooter* Session::generateOponent(oponentDifficulty difLvl)
 {
     entities::HEUTypes::Shooter* returnOponent = new entities::HEUTypes::Shooter(false, "");
@@ -125,9 +152,13 @@ entities::HEUTypes::Shooter* Session::generateOponent(oponentDifficulty difLvl)
       new entities::weapons::muskets::Moukahla,
       new entities::weapons::muskets::Hulverin,
       new entities::weapons::muskets::Tanegashima,
-      new entities::weapons::muskets::Enfield1861};
+      new entities::weapons::muskets::Enfield1861,
+      new entities::weapons::pistols::BSSP,
+      new entities::weapons::pistols::HarpersFerry1805};
     // To keep track which delete later, we will store information which weapon was choosen
     size_t pickedWeapon = 0;
+
+    std::vector<entities::Weapon*> nonEasyWeaponChoices = excludeWeaponTypeFromVector(weaponChoices, {WEAPON_TYPE_PISTOL});
 
     // If player stats are only zero-s then return dummy 0/0/0
     if(mainCharacter_->getStatAim() == 0 && mainCharacter_->getStatCharisma() == 0 && mainCharacter_->getStatVit() == 0)
@@ -172,7 +203,7 @@ entities::HEUTypes::Shooter* Session::generateOponent(oponentDifficulty difLvl)
             returnOponent->setStatAim(rand() % refMaxStat * 0.80 + rand() % refMaxStat * 1.20);
             returnOponent->setStatCharisma(rand() % refMaxStat * 0.80 + rand() % refMaxStat * 1.20);
             returnOponent->setStatVit(rand() % refMaxStat * 0.80 + rand() % refMaxStat * 1.20);
-            pickedWeapon = rand() % weaponChoices.size();
+            pickedWeapon = rand() % nonEasyWeaponChoices.size();
             returnOponent->setCurrentlyHeldWeapon( weaponChoices[pickedWeapon] );
         } while (returnOponent->getPower() > (powerRefferencePoint * 1.20) || returnOponent->getPower() < (powerRefferencePoint * 0.80));
          
@@ -186,7 +217,7 @@ entities::HEUTypes::Shooter* Session::generateOponent(oponentDifficulty difLvl)
             returnOponent->setStatAim(rand() % refMaxStat * 1.20 + rand() % refMaxStat * 2.50);
             returnOponent->setStatCharisma(rand() % refMaxStat * 1.20 + rand() % refMaxStat * 2.50);
             returnOponent->setStatVit(rand() % refMaxStat * 1.20 + rand() % refMaxStat * 2.50);
-            pickedWeapon = rand() % weaponChoices.size();
+            pickedWeapon = rand() % nonEasyWeaponChoices.size();
             returnOponent->setCurrentlyHeldWeapon( weaponChoices[pickedWeapon] );
         } while (returnOponent->getPower() > (powerRefferencePoint * 2.50) || returnOponent->getPower() < (powerRefferencePoint * 1.20));
          
