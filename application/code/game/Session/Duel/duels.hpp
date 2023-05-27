@@ -11,8 +11,9 @@
 #include "../../Entities/HEU/Shooter/shooter.hpp"
 #include "../../Player/player.hpp"
 
-const int DUEL_MIN_DIST = 4;
-const int DUEL_MAX_DIST = 95;
+const uint DUEL_MIN_DIST = 4;
+const uint DUEL_MAX_DIST = 95;
+const uint DUEL_MAX_ROUND = 20;
 
 class Duel
 {

@@ -74,9 +74,9 @@ void Duel::prepareForFight()
 Shooter* Duel::shootOut()
 {
     int round = 0;
-    while((player_->isConcious_ && oponent_->isConcious_) /*|| surrender was choosen*/ && round < 20)
+    while((player_->isConcious_ && oponent_->isConcious_) && round < DUEL_MAX_ROUND)
     {
-        printw("Round %d\n", round + 1);
+        printw("Round %d of %d\n", round + 1, DUEL_MAX_ROUND);
         round == 0 ? printw("First turn goes to %s\n", player_->name_.c_str()) : 
                      printw("The turn goes to %s\n", player_->name_.c_str());
         changeDistance();
