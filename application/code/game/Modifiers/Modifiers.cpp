@@ -6,8 +6,8 @@ namespace Modifiers
 {
 
     int calculateDuelReward(const double& enemyWeaponDmg, const double& enemyWeaponAccuracy, 
-                      const double& distance, const int& playerCharisma,
-                      const double& baseReward)
+                            const double& distance, const int& playerCharisma,
+                            const double& baseReward)
     {
         int enemyMod = enemyWeaponDmg + (enemyWeaponAccuracy * 100);
         int distanceMod = distance * 2;
@@ -56,7 +56,7 @@ namespace Modifiers
     /// @return 
     int calculateExpReward(int enemyPower, const double& shotsFired, const int& distance, 
                                   const bool& hasWon, const bool& hasEnemyDied,
-                                  const bool& wasOneShot, const bool& wasTie)
+                                  const bool& wasOneShot, const bool& wasTie, const bool& wasCutShort)
     {
         int base = 150;
         int finalExp = base;
@@ -108,7 +108,14 @@ namespace Modifiers
             finalExp = finalExp * 0.10;
         }
 
-        return finalExp;
+        if(wasCutShort)
+        {
+            return finalExp / 4;
+        }
+        else
+        {
+            return finalExp;
+        }
     }
 
     double calculateWeaponPrice(double basePrice, int playerCharisma)

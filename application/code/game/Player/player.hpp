@@ -57,7 +57,7 @@ class Player : public Shooter
     void setMoney(const uint32_t& money) { money_ = money;}
     void setMoneyWon(const uint32_t& moneyWon) { moneyWon_ = moneyWon; }
     void setDuelCount(const uint16_t& duelCount) { duelCount_ = duelCount;}
-    uint16_t setGlobalShotLandedCount(const uint16_t& shotLandedCount) { playerGlobalShotLandedCount_ = shotLandedCount; }
+    void setGlobalShotLandedCount(const uint16_t& shotLandedCount) { playerGlobalShotLandedCount_ = shotLandedCount; }
 
     Player(std::string name);
     ~Player();

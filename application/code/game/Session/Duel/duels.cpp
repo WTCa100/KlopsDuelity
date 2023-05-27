@@ -7,7 +7,7 @@
 #include "../../Display/Graphical/Arena/Arena.hpp"
 
 
-Duel::Duel(Player* player, Shooter* oponent) : player_(player), oponent_(oponent), distance_(12), duelShotCount_(0), playerDmgDealt_(0), enemyDmgDealt_(0), roundCount_(0)
+Duel::Duel(Player* player, Shooter* oponent) : player_(player), oponent_(oponent), distance_(12), duelShotCount_(0), playerDmgDealt_(0), enemyDmgDealt_(0), roundCount_(0), isCutShort_(false)
 {
     player_->setDuelCount(player_->getDuelCount() + 1);
     playerStartingHp_ = player_->getHealth();
@@ -36,6 +36,7 @@ bool Duel::askForSurrender()
     while(true)
     {
         printw("Are you sure you want to end fight early?\n");
+        printw("(Only a quater of potential reward will be earned!)\n");
         input = getch();
         if(input == 'y' || input == '\n' || input == KEY_ENTER)
         {
@@ -254,8 +255,13 @@ void Duel::announceWinner()
     {
         winScreen->winScreen(true);
         player_->duelsWonCount_ ++;
-        player_->setMoney(player_->getMoney() + reward_);
-        player_->setMoneyWon(player_->getMoneyWon() + reward_);
+        uint32_t finalReward = reward_;
+        if(isCutShort_)
+        {
+            finalReward /= 4;
+        }
+        player_->setMoney(player_->getMoney() + finalReward);
+        player_->setMoneyWon(player_->getMoneyWon() + finalReward);
         hasPlayerWon = true;
         winner_ = player_;
         printw("%s has won!\n", player_->name_.c_str());
