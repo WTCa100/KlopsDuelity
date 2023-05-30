@@ -18,11 +18,6 @@ int main()
     cbreak(); // Enbale line buffering
     keypad(stdscr, TRUE); // Enable keypad
 
-    // TODO try to implement continiously running function that allows to scroll the terminal window
-    // For now on this will be left as comments 
-    //scrollok(stdscr, TRUE);  
-    //mousemask(ALL_MOUSE_EVENTS, NULL); // Enable mouse events
-
     Application* gameApp = Application::getInstance();
     // Check files
     // Start app
