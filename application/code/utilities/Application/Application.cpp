@@ -21,10 +21,6 @@ Application* Application::getInstance()
     }
 }
 
-void Application::startGameSession()
-{
-}
-
 void Application::startApp()
 {
     // Get menu display
