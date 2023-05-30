@@ -14,7 +14,7 @@ namespace entities::HEUTypes
     class Shopkeeper : public HEU
     {
     private:
-        /// @brief First - Weapon for sale entry | Second - Is it sold
+        /// @brief First - Weapon for sale entry | Second - was sold state
         std::vector <std::pair<entities::Weapon*, bool>> weaponsForSale_;
         void presentItems();
         void showItem(int itemId);

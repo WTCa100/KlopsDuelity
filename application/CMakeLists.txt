@@ -16,6 +16,7 @@ target_link_libraries(${PROJECT_NAME}
     Display
     Town
     Arena
+    Logo
     Menu
     SessionMainScreen    
     HEU
