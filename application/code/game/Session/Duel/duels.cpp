@@ -60,7 +60,6 @@ void Duel::prepareForFight()
     if(player_)
     {
         player_->pickWeapon();
-        // Todo: allow player to pick his gun from his inventory
     }
     if(oponent_)
     {
@@ -171,7 +170,6 @@ void Duel::changeDistance()
                 {
                     isCutShort_ = true;
                     printw("Game ends early!\n");
-                    getch();
                     if(fightArena)
                     {
                         delete fightArena;
@@ -206,8 +204,6 @@ void Duel::changeDistance()
     delwin(arenaBox);
 }
 
-// TODO: When player faces enemy with greater health than him, he will always lose unless he kills his oponent
-// We will have to change that and check how many health each of the participants lost either in percentage or in plain numbers
 void Duel::announceWinner()
 {
     // This is due to be changed but for now whoever has the bigger hp wins.

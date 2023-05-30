@@ -123,7 +123,7 @@ void Player::showFullGameStats()
     printw("General game statistics:\n");
     printw("Duels played: %d\n", duelCount_);
     printw("Duels won: %d\n", duelsWonCount_);
-    printw("Shots fired: %d\n", playerGlobalShotCount_); // TODO
+    printw("Shots fired: %d\n", playerGlobalShotCount_);
     printw("Money %d\n", money_);
     printw("Money won: %d\n", moneyWon_);
 
@@ -191,7 +191,6 @@ void Player::levelStat()
                 }
                 
                 currentStat--;
-                printw("!-- DEBUG CURRENT STAT CHANGE%d\n", currentStat);
                 clear();
                 break;
             case KEY_RIGHT:
@@ -205,7 +204,6 @@ void Player::levelStat()
 
                 currentStat++;
                 clear();
-                printw("!-- DEBUG CURRENT STAT CHANGE%d\n", currentStat);
                 break;
             case KEY_ENTER:
             case '\n':

@@ -27,7 +27,6 @@ void Application::startGameSession()
 
 void Application::startApp()
 {
-    // TODO: get config
     // Get menu display
     Menu* mainMenu = new Menu;
     mainMenu->mainDisplay();

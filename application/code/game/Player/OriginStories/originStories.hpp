@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 
-// Todo fill this up so that every origin will be a instance of specific type which automatically will asign values for the player
 #include "../../Entities/Weapons/weapons.hpp"
 enum class PlayerOrigin
 {

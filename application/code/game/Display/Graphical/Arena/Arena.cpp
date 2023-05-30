@@ -3,7 +3,6 @@
 namespace Graphics
 {
 
-    // TODO: Make it more dynamic 
     void Arena::makeArena(const int& drawDistance, WINDOW* arenaBox)
     {
         drawDistance_ = drawDistance;
