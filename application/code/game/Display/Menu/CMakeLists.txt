@@ -15,5 +15,6 @@ target_include_directories(Menu
 add_subdirectory(./SessionMainScreen)
 
 target_link_libraries(Menu PUBLIC Display)
+target_link_libraries(Menu PUBLIC Logo)
 target_link_libraries(Menu PUBLIC InputCheck)
 target_link_libraries(Menu PUBLIC NIO)

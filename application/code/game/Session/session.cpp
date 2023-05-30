@@ -167,6 +167,7 @@ entities::HEUTypes::Shooter* Session::generateOponent(oponentDifficulty difLvl)
         returnOponent->setStatCharisma(0);
         returnOponent->setStatVit(0);
 
+        // TODO: Delete weapons allocated earlier.
         return returnOponent;
     }
 
