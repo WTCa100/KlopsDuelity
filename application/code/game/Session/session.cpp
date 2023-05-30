@@ -156,7 +156,8 @@ entities::HEUTypes::Shooter* Session::generateOponent(oponentDifficulty difLvl)
       new entities::weapons::pistols::BSSP,
       new entities::weapons::pistols::HarpersFerry1805};
     // To keep track which delete later, we will store information which weapon was choosen
-    size_t pickedWeapon = 0;
+    // Select weapon right away
+    size_t pickedWeapon = rand() % weaponChoices.size();
 
     std::vector<entities::Weapon*> nonEasyWeaponChoices = excludeWeaponTypeFromVector(weaponChoices, {WEAPON_TYPE_PISTOL});
 
@@ -166,8 +167,16 @@ entities::HEUTypes::Shooter* Session::generateOponent(oponentDifficulty difLvl)
         returnOponent->setStatAim(0);
         returnOponent->setStatCharisma(0);
         returnOponent->setStatVit(0);
+        returnOponent->setCurrentlyHeldWeapon( weaponChoices[pickedWeapon] );
 
-        // TODO: Delete weapons allocated earlier.
+        for(int weaponId = 0; weaponId < weaponChoices.size(); weaponId++)
+        {
+            if(weaponId != pickedWeapon)
+            {
+                delete weaponChoices[weaponId];
+            }
+        }       
+              
         return returnOponent;
     }
 
@@ -189,7 +198,6 @@ entities::HEUTypes::Shooter* Session::generateOponent(oponentDifficulty difLvl)
             returnOponent->setStatAim(rand() % refMaxStat * 0.65 + rand() % refMaxStat);
             returnOponent->setStatCharisma(rand() % refMaxStat * 0.65 + rand() % refMaxStat);
             returnOponent->setStatVit(rand() % refMaxStat * 0.65 + rand() % refMaxStat);
-            pickedWeapon = rand() % weaponChoices.size();
             returnOponent->setCurrentlyHeldWeapon( weaponChoices[pickedWeapon] );
         } while (returnOponent->getPower() > (powerRefferencePoint * 0.8) || returnOponent->getPower() < (powerRefferencePoint * 0.65));
         
@@ -203,6 +211,7 @@ entities::HEUTypes::Shooter* Session::generateOponent(oponentDifficulty difLvl)
             returnOponent->setStatAim(rand() % refMaxStat * 0.80 + rand() % refMaxStat * 1.20);
             returnOponent->setStatCharisma(rand() % refMaxStat * 0.80 + rand() % refMaxStat * 1.20);
             returnOponent->setStatVit(rand() % refMaxStat * 0.80 + rand() % refMaxStat * 1.20);
+            // Override weapon with noEasyWeaponChoices
             pickedWeapon = rand() % nonEasyWeaponChoices.size();
             returnOponent->setCurrentlyHeldWeapon( weaponChoices[pickedWeapon] );
         } while (returnOponent->getPower() > (powerRefferencePoint * 1.20) || returnOponent->getPower() < (powerRefferencePoint * 0.80));
@@ -220,10 +229,6 @@ entities::HEUTypes::Shooter* Session::generateOponent(oponentDifficulty difLvl)
             pickedWeapon = rand() % nonEasyWeaponChoices.size();
             returnOponent->setCurrentlyHeldWeapon( weaponChoices[pickedWeapon] );
         } while (returnOponent->getPower() > (powerRefferencePoint * 2.50) || returnOponent->getPower() < (powerRefferencePoint * 1.20));
-         
-
-        break;
-    default:
         break;
     }
 
