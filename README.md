@@ -10,6 +10,7 @@ known for the entirety of our planet!</p>
 ## The Game
 ![KlopsArena](https://github.com/WTCa100/KlopsDuelity/assets/93256649/8e1a039e-c2d4-49b3-bcba-3673b72d14a8)
 <p> Core gameplay is centered around dueling, where you face your generated enemies. Here you can choose which weapon to use adjust distance, and see how the arena is changing dynamically while you manouver your fighter. This is my very first attempt on creating a graphical component into a game, and I was made possbile because of <strong>NCurses</strong> library.</p>
+
 ### Main Menu
 <p> As in every game player is prompt to choose name of a hero and a origin story that slighlty impact the gameplay - as different origins gives different starting stats. After giving the necessery input player enter the town and is presented with 4 options which are: </p>
 <ol>
@@ -29,6 +30,7 @@ known for the entirety of our planet!</p>
   <li>Accuracy - gives better odds on hitting the enemy</li>
   <li>Charisma - Increases monetary rewards after fight and decreases weapon prices</li>
 </ul>
+
 ### Arena
 <p> When entering Arena a prompt will ask the player to choose on of 3 previously generated enemies. Position here matters as the higher the number the tougher the enemy when it comes to both power and dueling weaponry. The behavour of generator can be found and changed at: </br></p>
 
